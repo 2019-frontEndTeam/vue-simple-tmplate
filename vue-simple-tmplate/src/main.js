@@ -4,7 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-
+import 'element-ui/lib/theme-chalk/index.css'
+import { Button, Select } from 'element-ui'
+Vue.prototype.$ELEMENT = { size: 'small', zIndex: 2000 };
+Vue.use(Button)
+Vue.use(Select)
 // 引入接口文档
 import './api'
 
