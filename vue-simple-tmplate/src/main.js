@@ -3,6 +3,25 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
+
+// 引入接口文档
+import './api'
+
+// 过滤器
+import * as filters from './utils/filters'
+Object.keys(filters).forEach(filterName => {
+  Vue.filter(filterName, filters[filterName])
+})
+
+// 指令
+import * as directives from './utils/directives'
+Object.keys(directives).forEach(directiveName => {
+  Vue.directive(directiveName, directives[directiveName])
+})
+
+// 全局函数
+import '@/utils/func'
 
 Vue.config.productionTip = false
 
@@ -10,6 +29,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
