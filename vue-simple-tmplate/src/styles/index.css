@@ -1,4 +1,8 @@
 /* 公共样式 */
+* {
+  padding: 0;
+  margin: 0;
+}
 .fl {
   float: left;
 }
