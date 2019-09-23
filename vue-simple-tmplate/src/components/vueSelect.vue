@@ -86,7 +86,7 @@
     }
   }
 </script>
-<style lang="scss">
+<style>
   .fixed {
     position: fixed;
     padding: 10px 0px 5px 10px;

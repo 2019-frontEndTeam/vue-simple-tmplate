@@ -1,5 +1,6 @@
 <template>
   <div class="HelloWorld">
+    <vue-select :data="list" :value.sync="value" :multiple="true"></vue-select>
     <div class="text-center">
       <img
         class="pd mg"
@@ -23,23 +24,32 @@
   </div>
 </template>
 <script>
+import vueSelect from "./vueSelect";
 export default {
+  components: {
+    vueSelect
+  },
   data() {
     return {
-      imgList: [
+      list: [
         {
-          value: "123.png"
+          label: "qiu",
+          value: "1"
         },
         {
-          value: "321.png"
+          label: "yuan",
+          value: "2"
         }
-      ]
+      ],
+      value:""
     };
   },
   created() {
     console.log(window);
   },
-  methods: {}
+  methods: {
+    
+  }
 };
 </script>
 
