@@ -1,5 +1,5 @@
 <template functional>
-  <div v-show="props.loading">
+  <div>
     <div class="loader loader-2">
       <svg class="loader-star" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         version="1.1">
@@ -11,6 +11,6 @@
     </div>
   </div>
 </template>
-<style scoped>
-  @import "@/styles/animation.css";
+<style lang="scss" scoped>
+  @import "@/styles/animation.scss";
 </style>

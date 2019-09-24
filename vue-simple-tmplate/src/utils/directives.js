@@ -1,4 +1,4 @@
-export const drag = function (el, binding) {
+export const drag = function(el, binding) {
   var dv
   if (binding.expression) {
     dv = el.querySelector('.' + binding.expression)
@@ -12,7 +12,7 @@ export const drag = function (el, binding) {
   var t = 0
   var isDown = false
   //鼠标按下事件
-  dv.onmousedown = function (e) {
+  dv.onmousedown = function(e) {
     //获取x坐标和y坐标
     x = e.clientX
     y = e.clientY
@@ -26,7 +26,7 @@ export const drag = function (el, binding) {
     dv.style.cursor = 'move'
   }
   //鼠标移动
-  window.onmousemove = function (e) {
+  window.onmousemove = function(e) {
     if (isDown == false) {
       return
     }
@@ -41,14 +41,14 @@ export const drag = function (el, binding) {
     dv.style.top = nt + 'px'
   }
   //鼠标抬起事件
-  dv.onmouseup = function () {
+  dv.onmouseup = function() {
     //开关关闭
     isDown = false
     dv.style.cursor = 'default'
   }
 }
 
-export const isPermission = function (el, binding) {
+export const isPermission = function(el, binding) {
   // 当前菜单权限集
   let perms = [1, 2, 3]
   // 初始化按钮
@@ -59,7 +59,7 @@ export const isPermission = function (el, binding) {
   })
 }
 
-export const pc = function (el) {
+export const pc = function(el) {
   var userAgentInfo = navigator.userAgent
   var Agents = [
     'Android',
@@ -79,7 +79,7 @@ export const pc = function (el) {
 
 function Debounce(fn, delay = 500) {
   let timer
-  return function () {
+  return function() {
     let args = arguments
     if (timer) {
       clearTimeout(timer)
@@ -93,7 +93,7 @@ function Debounce(fn, delay = 500) {
 
 // 防抖
 export const debounce = {
-  bind: function (element, binding, node) {
+  bind: function(element, binding, node) {
     // 默认事件名
     let value = binding.expression || 'query'
     // 存储事件
@@ -101,7 +101,7 @@ export const debounce = {
     // 注销原事件
     node.context[value] = null
     // 停止点击0.5秒后，调用存储事件
-    element.onclick = Debounce(function () {
+    element.onclick = Debounce(function() {
       fn()
     }, 500)
   }
@@ -109,7 +109,7 @@ export const debounce = {
 
 // 请求懒加载
 export const lazyRequest = {
-  bind: function (element, binding, node) {
+  bind: function(element, binding, node) {
     let value = binding.expression || 'query'
     let listen = new IntersectionObserver(entries => {
       entries.forEach(item => {
@@ -117,46 +117,48 @@ export const lazyRequest = {
           setTimeout(() => {
             node.context[value]()
             listen.unobserve(item.target)
-          }, 500);
+          }, 500)
         }
       })
     })
-    listen.observe(element);
+    listen.observe(element)
   }
 }
 
 // 图片懒加载
 export const lazyImage = {
-  bind: function (element, binding, node) {
+  bind: function(element, binding, node) {
     let listen = new IntersectionObserver(entries => {
       entries.forEach(item => {
         if (item.isIntersecting) {
+          element.classList.add('show')
           setTimeout(() => {
             // element.src = binding.value
-            element.src = "https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/40/1b/ac/401bac19-2f4a-e14d-6f29-7e605e259611/AppIcon-0-1x_U007emarketing-0-85-220-0-5.png/180x180bb.png"
+            element.src =
+              'https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/40/1b/ac/401bac19-2f4a-e14d-6f29-7e605e259611/AppIcon-0-1x_U007emarketing-0-85-220-0-5.png/180x180bb.png'
 
-            listen.unobserve(item.target);
+            listen.unobserve(item.target)
           }, 500)
         }
       })
     })
-    listen.observe(element);
+    listen.observe(element)
   }
 }
 
 // 操作栏吸顶
 export const actionTab = {
-  bind: function (element, binding) {
+  bind: function(element, binding) {
     let listen = new IntersectionObserver(entries => {
-      let item = entries[0];
-      let top = item.boundingClientRect.top;
-      let e = document.querySelector(`.${binding.expression}`);
+      let item = entries[0]
+      let top = item.boundingClientRect.top
+      let e = document.querySelector(`.${binding.expression}`)
       if (top < 0) {
-        e.style.position = "fixed";
+        e.style.position = 'fixed'
       } else {
-        e.style.position = "relative";
+        e.style.position = 'relative'
       }
     })
-    listen.observe(element);
+    listen.observe(element)
   }
 }

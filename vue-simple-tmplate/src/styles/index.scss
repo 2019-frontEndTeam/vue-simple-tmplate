@@ -1,8 +1,27 @@
+div {
+  img {
+    &.show {
+     animation: up 1s ease;
+    }
+  }
+ }
+
+ @keyframes up {
+   from {
+     opacity: 0;
+     transform: translate(0px, 20px);
+   }
+
+   to {
+     opacity: 1;
+   }
+ }
 /* 公共样式 */
 * {
   padding: 0;
   margin: 0;
 }
+
 .fl {
   float: left;
 }
@@ -61,4 +80,23 @@
     display: inherit;
 
   }
+}
+
+/* 框架 */
+.el-radio__inner::after {
+  width: 6px;
+  height: 6px;
+}
+
+.el-button {
+  border-radius: 2px;
+}
+
+.el-input__inner {
+  border-radius: 2px;
+}
+
+.el-table th{
+  background: #f2f6fc;
+  color: #606266;
 }

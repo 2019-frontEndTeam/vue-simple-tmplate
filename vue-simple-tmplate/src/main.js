@@ -4,11 +4,40 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-import 'element-ui/lib/theme-chalk/index.css'
-import { Button, Select } from 'element-ui'
-Vue.prototype.$ELEMENT = { size: 'small', zIndex: 2000 };
+import {
+  Button,
+  Select,
+  Option,
+  Input,
+  Dialog,
+  Form,
+  FormItem,
+  Radio,
+  RadioGroup,
+  Notification,
+  Table,
+  TableColumn,
+  Loading
+} from 'element-ui'
+import './theme/index.css'
+
+Vue.prototype.$ELEMENT = { size: 'small', zIndex: 2000 }
 Vue.use(Button)
 Vue.use(Select)
+Vue.use(Option)
+Vue.use(Input)
+Vue.use(Dialog)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Radio)
+Vue.use(RadioGroup)
+Vue.use(Table)
+Vue.use(TableColumn)
+
+Vue.use(Loading.directive);
+Vue.prototype.$notify = Notification
+Vue.prototype.$loading = Loading.service;
+
 // 引入接口文档
 import './api'
 
