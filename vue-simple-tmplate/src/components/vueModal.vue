@@ -4,7 +4,7 @@
       <el-form :model="form" ref="form" label-width="80px">
         <el-form-item v-for="(item,index) in componentList" :key="index" :label="item.title" :prop="item.field"
           :rules="{required:item.required,message:'必填'}">
-          <component :data="item.data" :value.sync="form[item.field]" :is="item.component">
+          <component :data="item.data" :value.sync="form[item.field]" :id='item.id' :name="item.name" :is="item.component">
           </component>
         </el-form-item>
       </el-form>

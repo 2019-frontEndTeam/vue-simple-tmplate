@@ -2,7 +2,7 @@
   <div>
     <el-select ref="select" class="vue-select" :value="setArr(value)" placeholder="请选择" clearable :multiple="multiple"
       collapse-tags @change="selectChange">
-      <el-option v-for="item in data" :key="item.value" :label="item.label" :value="item.value"
+      <el-option v-for="(item,index) in data" :key="index" :label="item[name]" :value="item[id]"
         :disabled="item.disabled" v-show="!item.hidden">
       </el-option>
     </el-select>
@@ -28,9 +28,13 @@
         type: Boolean,
         default: false
       },
-      label: {
+      name: {
         type: String,
-        default: 'label'
+        default: 'name'
+      },
+      id: {
+        type: String,
+        default: 'id'
       }
     },
     data() {

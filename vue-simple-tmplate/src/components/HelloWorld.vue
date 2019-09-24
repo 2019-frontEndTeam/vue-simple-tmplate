@@ -1,7 +1,7 @@
 <template>
   <div class="HelloWorld">
     <vue-modal class="pd" :componentList="componentList"></vue-modal>
-    <vue-select class="pd" :data="list" :value.sync="value" :multiple="true"></vue-select>
+    <vue-select class="pd" :data="list" :value.sync="value" :multiple="true" id="value" name="label"></vue-select>
     <div class="text-center">
       <img class="pd mg" v-for="(item,index) in 20" v-lazyImage="item.value" :key="index" src="../assets/logo.png" />
     </div>
@@ -39,6 +39,8 @@
           {
             title: '姓名',
             field: 'id',
+            name: 'label',
+            id: 'value',
             component: 'vue-select',
             data: [
               {
@@ -54,6 +56,8 @@
           {
             title: '性别',
             field: 'type',
+            name: 'label',
+            id: 'value',
             required: true,
             component: 'vue-select',
             data: [
