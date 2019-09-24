@@ -2,6 +2,7 @@ export const componentList = [
   {
     title: '姓名',
     field: 'name',
+    required:true,
     name: 'label',
     id: 'value',
     component: 'select',

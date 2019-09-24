@@ -51,6 +51,11 @@
         form: {}
       };
     },
+    watch: {
+      visible() {
+        this.$emit("update:visible", this.visible)
+      }
+    },
     methods: {
       handleSubmit(name) {
         this.$refs[name].validate((valid) => {
@@ -67,7 +72,6 @@
           this.$set(this.form, item.field, "")
         })
         this.visible = true;
-        this.$emit("update:visible", this.visible)
         this.$nextTick(() => {
           this.$refs.form.resetFields();
         })
