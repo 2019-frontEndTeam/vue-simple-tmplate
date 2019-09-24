@@ -6,7 +6,7 @@
     <vue-select class="pd" :data="list" :value.sync="value" :multiple="true" id="value" name="label"></vue-select>
     <!-- 图片懒加载 -->
     <div class="text-center" v-once>
-      <img class="pd mg img" v-for="(item,index) in 20" v-lazyImage="item.value" :key="item" src="../assets/logo.png" />
+      <img class="pd mg img" v-for="(item,index) in 20" v-lazyImage="item.value" :key="index" src="../assets/logo.png" />
     </div>
     <!-- 吸顶，需要参照物 -->
     <div v-actionTab="actionTab"></div>

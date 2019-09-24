@@ -1,3 +1,4 @@
+require("intersection-observer")
 export const drag = function(el, binding) {
   var dv
   if (binding.expression) {
