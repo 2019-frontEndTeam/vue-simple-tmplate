@@ -15,7 +15,7 @@ const fn = {
         title: message
       })
       // 响应成功后 do something...
-      Fn.successHandle(obj)
+      fn.successHandle(obj)
       return true
     } else {
       that.$Notice.error({
@@ -49,7 +49,7 @@ const fn = {
   // 滚动分页
   scrollPaging(totalData, data, row = 20) {
     for (var i = thisVue.page * row - row; i < thisVue.page * row; i++) {
-      if (!Fn.isEmptyObject(totalData[i])) {
+      if (!fn.isEmptyObject(totalData[i])) {
         data.push(totalData[i])
       }
     }
@@ -67,9 +67,9 @@ const fn = {
       dateStr =
         date1.getFullYear() +
         '-' +
-        Fn.num2digit(date1.getMonth() + 1) +
+        fn.num2digit(date1.getMonth() + 1) +
         '-' +
-        Fn.num2digit(date1.getDate())
+        fn.num2digit(date1.getDate())
     return dateStr
   },
   //格式日期 时间戳转为yy-mm-dd hh:mm:ss
@@ -77,11 +77,11 @@ const fn = {
     let date1 = new Date(date),
       dateStr =
         date1.getFullYear() +
-        Fn.num2digit(date1.getMonth() + 1) +
-        Fn.num2digit(date1.getDate()) +
-        Fn.num2digit(date1.getHours()) +
-        Fn.num2digit(date1.getMinutes()) +
-        Fn.num2digit(date1.getSeconds()),
+        fn.num2digit(date1.getMonth() + 1) +
+        fn.num2digit(date1.getDate()) +
+        fn.num2digit(date1.getHours()) +
+        fn.num2digit(date1.getMinutes()) +
+        fn.num2digit(date1.getSeconds()),
       ymdData =
         dateStr.slice(0, 4) +
         '-' +
@@ -103,11 +103,11 @@ const fn = {
     let date1 = new Date(date),
       dateStr =
         date1.getFullYear() +
-        Fn.num2digit(date1.getMonth() + 1) +
-        Fn.num2digit(date1.getDate()) +
-        Fn.num2digit(date1.getHours()) +
-        Fn.num2digit(date1.getMinutes()) +
-        Fn.num2digit(date1.getSeconds()),
+        fn.num2digit(date1.getMonth() + 1) +
+        fn.num2digit(date1.getDate()) +
+        fn.num2digit(date1.getHours()) +
+        fn.num2digit(date1.getMinutes()) +
+        fn.num2digit(date1.getSeconds()),
       timeData =
         dateStr.slice(8, 10) +
         ':' +
@@ -148,7 +148,7 @@ const fn = {
       let obj = { ...(isChecked ? { checked: false } : null) }
       // 如果有子节点，递归
       if (item[map.children]) {
-        item[map.children] = Fn.convertTree(item[map.children], map, isChecked)
+        item[map.children] = fn.convertTree(item[map.children], map, isChecked)
       } else {
         item[map.children]
       }
