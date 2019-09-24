@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-select class="vue-select" :value="setArr(value)" placeholder="请选择" clearable :multiple="multiple" collapse-tags
-      @change="selectChange">
+    <el-select ref="select" class="vue-select" :value="setArr(value)" placeholder="请选择" clearable :multiple="multiple"
+      collapse-tags @change="selectChange">
       <el-option v-for="item in data" :key="item.value" :label="item.label" :value="item.value"
         :disabled="item.disabled" v-show="!item.hidden">
       </el-option>
@@ -46,7 +46,7 @@
       }
     },
     mounted() {
-      document.querySelector('.el-select-dropdown__wrap').prepend(this.$refs.action);
+      this.$refs.select.$children[1].$el.prepend(this.$refs.action);
     },
     methods: {
       setArr(v) {
