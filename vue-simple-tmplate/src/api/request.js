@@ -1,3 +1,5 @@
+import { Notification } from 'element-ui'
+
 const service = axios.create({
   baseURL: process.env.BASE_URL,
   timeout: 60000
@@ -5,7 +7,6 @@ const service = axios.create({
 
 service.interceptors.request.use(
   config => {
-
     return config
   },
   error => {
@@ -15,10 +16,12 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
-
     return response
   },
   error => {
+    Notification.error({
+      title: '请求失败，请重新登录。'
+    })
     Promise.reject(error)
   }
 )

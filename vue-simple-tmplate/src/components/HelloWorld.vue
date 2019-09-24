@@ -1,87 +1,57 @@
 <template>
   <div class="HelloWorld">
-    <vue-modal class="pd" :componentList="componentList"></vue-modal>
+    <!-- 弹窗组件 -->
+    <vue-modal class="pd" :visible.sync="visible" :componentList="componentList" @confirm="handleSumbit"></vue-modal>
+    <!-- 下拉组件 -->
     <vue-select class="pd" :data="list" :value.sync="value" :multiple="true" id="value" name="label"></vue-select>
-    <div class="text-center">
-      <img class="pd mg img" v-for="(item,index) in 20" v-lazyImage="item.value" :key="index"
-        src="../assets/logo.png" />
+    <!-- 图片懒加载 -->
+    <div class="text-center" v-once>
+      <img class="pd mg img" v-for="(item,index) in 20" v-lazyImage="item.value" :key="item" src="../assets/logo.png" />
     </div>
+    <!-- 吸顶，需要参照物 -->
     <div v-actionTab="actionTab"></div>
     <div class="actionTab text-center">吸顶</div>
-    <div class="text-center">
+    <!-- 图片懒加载 -->
+    <div class="text-center" v-once>
       <img class="pd mg img" v-for="(item,index) in 20" v-lazyImage="item.value" :key="index"
         src="../assets/logo.png" />
     </div>
+    <el-table height="500" element-loading-spinner="el-icon-orange" element-loading-background="rgba(255,255,255,.7)"
+      element-loading-custom-class="rotate-loading" v-loading="loading" border :data="tableData" v-lazyRequest>
+      <el-table-column prop="value" label="#" align="center">
+      </el-table-column>
+      <el-table-column prop="label" label="姓名" align="center">
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 <script>
+  import { componentList, list } from './index.js'
   import vueSelect from "./vueSelect";
-  import vueModal from "./vueModal"
   export default {
     components: {
-      vueSelect,
-      vueModal
+      vueModal(resolve) {
+        require(['@/components/vueModal.vue'], resolve);
+      },
+      vueSelect
     },
     data() {
       return {
-        form: {
-
-        },
-        list: [
-          {
-            label: "qiu",
-            value: "1"
-          },
-          {
-            label: "yuan",
-            value: "2"
-          }
-        ],
-        componentList: [
-          {
-            title: '姓名',
-            field: 'sex',
-            name: 'label',
-            id: 'value',
-            component: 'select',
-            data: [
-              {
-                label: "qiu",
-                value: "1"
-              },
-              {
-                label: "yuan",
-                value: "2"
-              }
-            ],
-          },
-          {
-            title: '性别',
-            field: 'name',
-            name: 'label',
-            id: 'value',
-            component: 'radio',
-            data: [
-              {
-                label: "男",
-                value: "1"
-              },
-              {
-                label: "女",
-                value: "2"
-              }
-            ],
-          },
-          {
-            field: 'inputValue',
-            title: '年龄',
-            component: 'input'
-          }
-        ],
-        value: ""
+        form: {},
+        value: "",
+        list: list,
+        loading: true,
+        visible: false,
+        tableData: [],
+        selectList: [],
+        componentList: componentList,
       };
     },
     created() {
+      // 初始化this
+      this.$fn.init(this);
+      // 下拉数据  true开启缓存
+      this.$fn.selectList(this.$api.listApi, 'selectList', true);
       // yyyy-mm-dd
       console.log(this.$fn.formatDate1(new Date()))
       // yyyy-mm-dd hh:mm:ss
@@ -92,16 +62,30 @@
       console.log(this.$fn.formatDate2(new Date() - 3600 * 1000 * 24))
     },
     methods: {
-
+      handleSumbit(value) {
+        // 子组件处理好的请求参数
+        console.log(value)
+        // 响应处理
+        this.$fn.responseHandle(200, '保存成功', { visible: false });
+      },
+      query() {
+        // this.$api.listApi()
+        this.tableData = this.list;
+        this.loading = false;
+      }
     }
   };
 </script>
-
-<style scoped>
-  .HelloWorld {
-    height: 3000px;
+<style lang="scss">
+  .rotate-loading {
+    i {
+      font-size: 30px;
+      color: #0178F4;
+      animation: rotating 1s linear infinite;
+    }
   }
-
+</style>
+<style lang="scss" scoped>
   .actionTab {
     width: 100%;
     position: relative;

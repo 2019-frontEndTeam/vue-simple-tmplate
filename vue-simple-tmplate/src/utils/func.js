@@ -1,9 +1,9 @@
 var that
 const fn = {
-  init(that) {
-    that = that
+  init(thisVue) {
+    that = thisVue
   },
-  successHandle(obj) {
+  successHandle(obj = {}) {
     Object.keys(obj).forEach(key => {
       that[key] = obj[key]
     })
@@ -11,21 +11,21 @@ const fn = {
   // 处理接口状态码
   responseHandle(status, message, obj) {
     if (status == 200) {
-      that.$Notice.success({
+      that.$notify.success({
         title: message
       })
       // 响应成功后 do something...
       fn.successHandle(obj)
       return true
     } else {
-      that.$Notice.error({
+      that.$notify.error({
         title: message
       })
       return false
     }
   },
   // 下拉数据封装 是否缓存
-  selectList(selectApi, name, data = {}, cache = false) {
+  selectList(selectApi, name, cache = false, data = {}) {
     if (localStorage.getItem(name)) {
       that[name] = JSON.parse(localStorage.getItem(name))
     } else {
@@ -48,7 +48,7 @@ const fn = {
   },
   // 滚动分页
   scrollPaging(totalData, data, row = 20) {
-    for (var i = thisVue.page * row - row; i < thisVue.page * row; i++) {
+    for (var i = that.page * row - row; i < that.page * row; i++) {
       if (!fn.isEmptyObject(totalData[i])) {
         data.push(totalData[i])
       }

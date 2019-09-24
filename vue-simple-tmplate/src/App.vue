@@ -7,10 +7,10 @@
 <script>
   export default {
     name: 'App',
-    
+
   }
 </script>
 
-<style>
-  @import "./styles/index.css";
+<style lang="scss">
+  @import "./styles/index.scss";
 </style>

@@ -1,3 +1,21 @@
+div {
+  img {
+    &.show {
+     animation: up 1s ease;
+    }
+  }
+ }
+
+ @keyframes up {
+   from {
+     opacity: 0;
+     transform: translate(0px, 20px);
+   }
+
+   to {
+     opacity: 1;
+   }
+ }
 /* 公共样式 */
 * {
   padding: 0;
@@ -76,4 +94,9 @@
 
 .el-input__inner {
   border-radius: 2px;
+}
+
+.el-table th{
+  background: #f2f6fc;
+  color: #606266;
 }

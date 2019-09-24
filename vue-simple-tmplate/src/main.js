@@ -13,7 +13,11 @@ import {
   Form,
   FormItem,
   Radio,
-  RadioGroup
+  RadioGroup,
+  Notification,
+  Table,
+  TableColumn,
+  Loading
 } from 'element-ui'
 import './theme/index.css'
 
@@ -27,6 +31,13 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Radio)
 Vue.use(RadioGroup)
+Vue.use(Table)
+Vue.use(TableColumn)
+
+Vue.use(Loading.directive);
+Vue.prototype.$notify = Notification
+Vue.prototype.$loading = Loading.service;
+
 // 引入接口文档
 import './api'
 

@@ -40,11 +40,14 @@
       modalTitle: {
         type: String,
         default: '新增'
+      },
+      visible: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
       return {
-        visible: false,
         form: {}
       };
     },
@@ -52,9 +55,7 @@
       handleSubmit(name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            console.log(this.form);
-            this.visible = false;
-            this.$emit("click", this.form);
+            this.$emit("confirm", this.form);
           } else {
             return false;
           }
@@ -66,6 +67,7 @@
           this.$set(this.form, item.field, "")
         })
         this.visible = true;
+        this.$emit("update:visible", this.visible)
         this.$nextTick(() => {
           this.$refs.form.resetFields();
         })
