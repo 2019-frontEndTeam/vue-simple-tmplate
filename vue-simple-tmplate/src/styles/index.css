@@ -3,6 +3,7 @@
   padding: 0;
   margin: 0;
 }
+
 .fl {
   float: left;
 }
@@ -61,4 +62,18 @@
     display: inherit;
 
   }
+}
+
+/* 框架 */
+.el-radio__inner::after {
+  width: 6px;
+  height: 6px;
+}
+
+.el-button {
+  border-radius: 2px;
+}
+
+.el-input__inner {
+  border-radius: 2px;
 }

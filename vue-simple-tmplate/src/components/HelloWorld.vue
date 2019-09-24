@@ -3,12 +3,14 @@
     <vue-modal class="pd" :componentList="componentList"></vue-modal>
     <vue-select class="pd" :data="list" :value.sync="value" :multiple="true" id="value" name="label"></vue-select>
     <div class="text-center">
-      <img class="pd mg" v-for="(item,index) in 20" v-lazyImage="item.value" :key="index" src="../assets/logo.png" />
+      <img class="pd mg img" v-for="(item,index) in 20" v-lazyImage="item.value" :key="index"
+        src="../assets/logo.png" />
     </div>
     <div v-actionTab="actionTab"></div>
     <div class="actionTab text-center">吸顶</div>
     <div class="text-center">
-      <img class="pd mg" v-for="(item,index) in 20" v-lazyImage="item.value" :key="index" src="../assets/logo.png" />
+      <img class="pd mg img" v-for="(item,index) in 20" v-lazyImage="item.value" :key="index"
+        src="../assets/logo.png" />
     </div>
   </div>
 </template>
@@ -38,10 +40,10 @@
         componentList: [
           {
             title: '姓名',
-            field: 'id',
+            field: 'sex',
             name: 'label',
             id: 'value',
-            component: 'vue-select',
+            component: 'select',
             data: [
               {
                 label: "qiu",
@@ -55,21 +57,25 @@
           },
           {
             title: '性别',
-            field: 'type',
+            field: 'name',
             name: 'label',
             id: 'value',
-            required: true,
-            component: 'vue-select',
+            component: 'radio',
             data: [
               {
-                label: "qiu",
+                label: "男",
                 value: "1"
               },
               {
-                label: "yuan",
+                label: "女",
                 value: "2"
               }
             ],
+          },
+          {
+            field: 'inputValue',
+            title: '年龄',
+            component: 'input'
           }
         ],
         value: ""
@@ -102,5 +108,10 @@
     background: palegreen;
     top: 0;
     left: 0;
+  }
+
+  .img {
+    width: 200px;
+    height: 200px;
   }
 </style>
