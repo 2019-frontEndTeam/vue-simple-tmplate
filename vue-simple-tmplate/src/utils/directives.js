@@ -153,8 +153,9 @@ export const actionTab = {
     let listen = new IntersectionObserver(entries => {
       let item = entries[0]
       let top = item.boundingClientRect.top
+      console.log(top)
       let e = document.querySelector(`.${binding.expression}`)
-      if (top < 0) {
+      if ((top < 60 || top < 0 ) && top != 0) {
         e.style.position = 'fixed'
       } else {
         e.style.position = 'relative'

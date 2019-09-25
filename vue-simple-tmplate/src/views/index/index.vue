@@ -1,5 +1,5 @@
 <template>
-  <div class="HelloWorld">
+  <div class="index">
     <!-- 弹窗组件 -->
     <vue-modal class="pd" :visible.sync="visible" :componentList="componentList" @confirm="handleSumbit"></vue-modal>
     <!-- 下拉组件 -->
@@ -13,8 +13,7 @@
     <div class="actionTab text-center">吸顶</div>
     <!-- 图片懒加载 -->
     <div class="text-center" v-once>
-      <img class="pd mg img" v-for="(item,index) in 20" v-lazyImage="item.value" :key="index"
-        src="@/assets/logo.png" />
+      <img class="pd mg img" v-for="(item,index) in 20" v-lazyImage="item.value" :key="index" src="@/assets/logo.png" />
     </div>
     <el-table height="500" element-loading-spinner="el-icon-orange" element-loading-background="rgba(255,255,255,.7)"
       element-loading-custom-class="rotate-loading" v-loading="loading" border :data="tableData" v-lazyRequest>
@@ -41,11 +40,16 @@
         value: "",
         list: list,
         loading: true,
+        disabled: false,
         visible: false,
         tableData: [],
         selectList: [],
         componentList: componentList,
       };
+    },
+    mounted() {
+
+
     },
     created() {
       // 初始化this
@@ -60,6 +64,7 @@
       console.log(this.$fn.formatDate3(new Date()))
       // 3600*1000*24 = 24h
       console.log(this.$fn.formatDate2(new Date() - 3600 * 1000 * 24))
+
     },
     methods: {
       handleSumbit(value) {

@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view />
+    <transition name="el-zoom-in-center">
+      <router-view v-show="true"></router-view>
+    </transition>
   </div>
 </template>
 

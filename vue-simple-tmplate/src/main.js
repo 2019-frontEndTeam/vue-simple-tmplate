@@ -17,7 +17,20 @@ import {
   Notification,
   Table,
   TableColumn,
-  Loading
+  Loading,
+  Container,
+  Header,
+  Menu,
+  Submenu,
+  MenuItem,
+  MenuItemGroup,
+  Card,
+  Icon,
+  Main,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Backtop
 } from 'element-ui'
 import './theme/index.css'
 
@@ -33,7 +46,19 @@ Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(Table)
 Vue.use(TableColumn)
-
+Vue.use(Menu);
+Vue.use(Submenu);
+Vue.use(MenuItem);
+Vue.use(MenuItemGroup);
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Card)
+Vue.use(Icon)
+Vue.use(Main)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Backtop)
 Vue.use(Loading.directive);
 Vue.prototype.$notify = Notification
 Vue.prototype.$loading = Loading.service;
