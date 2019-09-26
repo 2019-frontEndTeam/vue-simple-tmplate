@@ -52,6 +52,14 @@
     height: 100%;
   }
 
+  @media screen and (max-width: 414px) {
+    .el-menu-vertical-demo:not(.el-menu--collapse) {
+      width: 0px;
+      overflow: hidden;
+      height: 100%;
+    }
+  }
+
   .el-menu--collapse {
     height: 100%;
   }

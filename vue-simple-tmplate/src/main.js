@@ -46,10 +46,10 @@ Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(Table)
 Vue.use(TableColumn)
-Vue.use(Menu);
-Vue.use(Submenu);
-Vue.use(MenuItem);
-Vue.use(MenuItemGroup);
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
 Vue.use(Container)
 Vue.use(Header)
 Vue.use(Card)
@@ -59,9 +59,9 @@ Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Backtop)
-Vue.use(Loading.directive);
+Vue.use(Loading.directive)
 Vue.prototype.$notify = Notification
-Vue.prototype.$loading = Loading.service;
+Vue.prototype.$loading = Loading.service
 
 // 引入接口文档
 import './api'
@@ -80,6 +80,11 @@ Object.keys(directives).forEach(directiveName => {
 
 // 全局函数
 import '@/utils/func'
+
+// 按需引入echarts
+
+const echarts = equire(['line', 'tooltip','title','pie','legend','bar'])
+Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 
