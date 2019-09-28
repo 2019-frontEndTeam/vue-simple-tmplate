@@ -1,6 +1,6 @@
 <template>
   <div class="vueModal">
-    <el-dialog :title="modalTitle" :visible.sync="visible">
+    <el-dialog :title="modalTitle" :visible.sync="visible" :before-close="beforeClose" :append-to-body="true">
       <el-form :model="form" ref="form" label-width="80px" style="text-align-last: justify;margin:0px 80px;">
         <el-form-item v-for="(item,index) in componentList" :key="index" :label="item.title" :prop="item.field"
           :rules="{required:item.required,message:'必填'}">
@@ -16,14 +16,15 @@
               {{radioItem[item.name]}}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <slot></slot>
+        <slot name="formItem"></slot>
       </el-form>
-      <div slot="footer" class="dialog-footer">
+      <slot name="info"></slot>
+      <div v-if="isFooter" slot="footer" class="dialog-footer">
         <el-button @click="visible = false">取 消</el-button>
         <el-button type="primary" @click="handleSubmit('form')">确 定</el-button>
       </div>
     </el-dialog>
-    <el-button type="primary" @click="openModal">{{modalTitle}}</el-button>
+    <el-button v-if="isButton" type="primary" @click="openModal">{{modalTitle}}</el-button>
   </div>
 </template>
 <script>
@@ -44,6 +45,17 @@
       visible: {
         type: Boolean,
         default: false
+      },
+      isFooter: {
+        type: Boolean,
+        default: true
+      },
+      isButton: {
+        type: Boolean,
+        default: true
+      },
+      echoData: {
+        default: {}
       }
     },
     data() {
@@ -53,7 +65,10 @@
     },
     watch: {
       visible() {
-        this.$emit("update:visible", this.visible)
+        this.$emit("update:visible", this.visible);
+      },
+      echoData() {
+        this.form = this.echoData;
       }
     },
     methods: {
@@ -65,24 +80,23 @@
             return false;
           }
         })
-
+      },
+      beforeClose() {
+        this.visible = false;
+        this.$refs.form.resetFields();
       },
       openModal() {
-        this.componentList.forEach(item => {
-          this.$set(this.form, item.field, "")
-        })
+        // this.componentList.forEach(item => {
+        //   this.$set(this.form, item.field, "");
+        // })
         this.visible = true;
-        this.$nextTick(() => {
-          this.$refs.form.resetFields();
-        })
+        this.$emit('open');
       }
     }
   };
 </script>
 <style lang="scss">
-  .vueModal {
-    .el-dialog__header {
-      border-bottom: 1px solid #eee;
-    }
+  .el-dialog__header {
+    border-bottom: 1px solid #eee;
   }
 </style>

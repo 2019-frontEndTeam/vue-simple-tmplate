@@ -13,9 +13,8 @@
 </script>
 <style scoped>
   .app-main {
-    height: 100%;
+    height: inherit;
     box-sizing: border-box;
-    padding: 30px 20px;
-    width: 100%;
+    padding:20px;
   }
 </style>

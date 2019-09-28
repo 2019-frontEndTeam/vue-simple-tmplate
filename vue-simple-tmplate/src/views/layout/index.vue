@@ -18,6 +18,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </el-header>
+        <historyNav :activeName="activeName" :breadcrumb="breadcrumb"></historyNav>
         <el-main>
           <app-main></app-main>
         </el-main>
@@ -27,28 +28,37 @@
   </div>
 </template>
 <script>
+  import historyNav from './historyNav.vue'
   import appMain from './appMain'
   import Menu from './Menu.vue'
   export default {
     components: {
       Menu,
-      appMain
+      appMain,
+      historyNav
     },
     data() {
       return {
         index: '1',
         route: [],
+        activeName: '',
+        breadcrumb: [],
         isCollapse: true,
       }
     },
     watch: {
       $route(to, from, next) {
-        this.index = to.meta.index
+        this.activeName = to.path;
+        this.index = to.meta.index;
+        this.breadcrumb = this.$fn.filterBreadcrumb(this.breadcrumb, this.$route.name);
       }
     },
     created() {
+      this.breadcrumb = [{ name: this.$route.name, path: this.$route.path }];
       this.route = this.$router.options.routes[1].children;
       this.index = this.$route.meta.index;
+      this.activeName = this.$route.path;
+
     },
     methods: {
       exit() {
@@ -56,7 +66,7 @@
           path: '/'
         })
       },
-      switchChange(boolean) {
+      switchChange() {
         if (this.isCollapse) {
           this.$refs.switch.classList.add('rotate');
           this.isCollapse = false;
@@ -64,7 +74,6 @@
           this.$refs.switch.classList.remove('rotate');
           this.isCollapse = true;
         }
-
       }
     }
   }

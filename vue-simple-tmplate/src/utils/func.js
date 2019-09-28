@@ -32,10 +32,8 @@ const fn = {
       selectApi(data).then(res => {
         if (cache) {
           localStorage.setItem(name, JSON.stringify(res.data.rows))
-          that[name] = res.data.rows
-        } else {
-          that[name] = res.data.rows
         }
+        that[name] = res.data.rows
       })
     }
   },
@@ -160,8 +158,8 @@ const fn = {
     })
     return result
   },
-  exportExcel(api) {
-    api({ ...that.form }, { responseType: 'arraybuffer' })
+  exportExcel(excelApi) {
+    excelApi({ ...that.form }, { responseType: 'arraybuffer' })
       .then(res => {
         let date = this.formatDate1(new Date())
         let fileName = res.headers['content-disposition'].split('=')[1]

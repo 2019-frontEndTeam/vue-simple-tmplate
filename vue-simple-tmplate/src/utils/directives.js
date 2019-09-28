@@ -1,5 +1,5 @@
-require("intersection-observer")
-export const drag = function (el, binding) {
+require('intersection-observer')
+export const drag = function(el, binding) {
   var dv
   if (binding.expression) {
     dv = el.querySelector('.' + binding.expression)
@@ -13,7 +13,7 @@ export const drag = function (el, binding) {
   var t = 0
   var isDown = false
   //鼠标按下事件
-  dv.onmousedown = function (e) {
+  dv.onmousedown = function(e) {
     //获取x坐标和y坐标
     x = e.clientX
     y = e.clientY
@@ -27,7 +27,7 @@ export const drag = function (el, binding) {
     dv.style.cursor = 'move'
   }
   //鼠标移动
-  window.onmousemove = function (e) {
+  window.onmousemove = function(e) {
     if (isDown == false) {
       return
     }
@@ -42,14 +42,14 @@ export const drag = function (el, binding) {
     dv.style.top = nt + 'px'
   }
   //鼠标抬起事件
-  dv.onmouseup = function () {
+  dv.onmouseup = function() {
     //开关关闭
     isDown = false
     dv.style.cursor = 'default'
   }
 }
 
-export const isPermission = function (el, binding) {
+export const isPermission = function(el, binding) {
   // 当前菜单权限集
   let perms = [1, 2, 3]
   // 初始化按钮
@@ -60,7 +60,7 @@ export const isPermission = function (el, binding) {
   })
 }
 
-export const pc = function (el) {
+export const pc = function(el) {
   var userAgentInfo = navigator.userAgent
   var Agents = [
     'Android',
@@ -78,9 +78,9 @@ export const pc = function (el) {
   }
 }
 
-function Debounce(fn, delay = 500) {
+function Debounce(fn, delay = 300) {
   let timer
-  return function () {
+  return function() {
     let args = arguments
     if (timer) {
       clearTimeout(timer)
@@ -94,7 +94,7 @@ function Debounce(fn, delay = 500) {
 
 // 防抖
 export const debounce = {
-  bind: function (element, binding, node) {
+  bind: function(element, binding, node) {
     // 默认事件名
     let value = binding.expression || 'query'
     // 存储事件
@@ -102,15 +102,17 @@ export const debounce = {
     // 注销原事件
     node.context[value] = null
     // 停止点击0.5秒后，调用存储事件
-    element.onclick = Debounce(function () {
+    element.onclick = Debounce(function() {
       fn()
-    }, 500)
+    })
   }
 }
 
-// 请求懒加载
+// 请求懒加载：
+// 1.减轻服务器压力
+// 2.避免使用组件延时加载插件引起的节点重排
 export const lazyRequest = {
-  bind: function (element, binding, node) {
+  bind: function(element, binding, node) {
     let value = binding.expression || 'query'
     let listen = new IntersectionObserver(entries => {
       entries.forEach(item => {
@@ -128,10 +130,11 @@ export const lazyRequest = {
 
 // 图片懒加载
 export const lazyImage = {
-  bind: function (element, binding, node) {
+  bind: function(element, binding, node) {
     let listen = new IntersectionObserver(entries => {
       entries.forEach(item => {
         if (item.isIntersecting) {
+          // 添加动画
           element.classList.add('show')
           setTimeout(() => {
             // element.src = binding.value
@@ -149,17 +152,21 @@ export const lazyImage = {
 
 // 操作栏吸顶
 export const actionTab = {
-  bind: function (element, binding) {
+  inserted: function(element, binding) {
+    var e = document.querySelector(`.${binding.expression}`)
+
+    ;(window.onresize = function() {
+      e.style.width = `${element.clientWidth}px`
+    })()
+
     let listen = new IntersectionObserver(entries => {
       let item = entries[0]
       let top = item.boundingClientRect.top
-      let width = item.boundingClientRect.width
-      let e = document.querySelector(`.${binding.expression}`)
-      if ((top < 60 || top < 0) && top != 0) {
-        e.style.top = `60px`
-        e.style.width = `${width}px`
+      if ((top < 130 || top < 0) && top != 0) {
+        e.style.top = `111px`
         e.style.position = 'fixed'
-      } else {
+      }
+      if (item.isIntersecting) {
         e.style.top = `0px`
         e.style.position = 'relative'
       }

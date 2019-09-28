@@ -199,15 +199,7 @@ export const GlineOption = {
     {
       type: 'category',
       boundaryGap: false,
-      data: [
-        '2019/9/24',
-        '2019/9/24',
-        '2019/9/24',
-        '2019/9/24',
-        '2019/9/24',
-        '2019/9/24',
-        '2019/9/24'
-      ],
+      data: [],
       axisLine: {
         show: false,
         lineStyle: {
@@ -258,7 +250,7 @@ export const GlineOption = {
       axisTick: {
         show: false
       },
-      data: [23, 3, 111, 233, 59, 32, 23]
+      data: []
     }
   ],
   series: [

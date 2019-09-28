@@ -30,7 +30,10 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  Backtop
+  Backtop,
+  Tabs,
+  TabPane,
+  Tag
 } from 'element-ui'
 import './theme/index.css'
 
@@ -59,6 +62,9 @@ Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Backtop)
+Vue.use(Tabs)
+Vue.use(TabPane)
+Vue.use(Tag)
 Vue.use(Loading.directive)
 Vue.prototype.$notify = Notification
 Vue.prototype.$loading = Loading.service
