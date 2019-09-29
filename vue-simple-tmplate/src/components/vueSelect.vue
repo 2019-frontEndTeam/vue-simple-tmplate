@@ -1,5 +1,6 @@
 <template>
   <div>
+    <span v-if="title" class="s-title">{{title}}</span>
     <el-select ref="select" class="vue-select" :value="setArr(value)" placeholder="请选择" clearable :multiple="multiple"
       collapse-tags @change="selectChange">
       <el-option v-for="(item,index) in data" :key="index" :label="item[name]" :value="item[id]"
@@ -27,6 +28,9 @@
       multiple: {
         type: Boolean,
         default: false
+      },
+      title:{
+        default:''
       },
       name: {
         type: String,
@@ -90,7 +94,13 @@
     }
   }
 </script>
-<style>
+<style scoped>
+  .s-title {
+    padding: 0px 5px 0px 20px;
+    font-size: 14px;
+    color: grey;
+  }
+
   .fixed {
     position: fixed;
     padding: 10px 0px 5px 10px;
@@ -100,7 +110,8 @@
     background: #fff;
     z-index: 999;
   }
-
+</style>
+<style>
   .el-scrollbar {
     width: 500px;
   }

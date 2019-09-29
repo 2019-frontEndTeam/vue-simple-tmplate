@@ -1,3 +1,4 @@
+require('intersection-observer')
 export const drag = function(el, binding) {
   var dv
   if (binding.expression) {
@@ -77,7 +78,7 @@ export const pc = function(el) {
   }
 }
 
-function Debounce(fn, delay = 500) {
+function Debounce(fn, delay = 300) {
   let timer
   return function() {
     let args = arguments
@@ -103,11 +104,13 @@ export const debounce = {
     // 停止点击0.5秒后，调用存储事件
     element.onclick = Debounce(function() {
       fn()
-    }, 500)
+    })
   }
 }
 
-// 请求懒加载
+// 请求懒加载：
+// 1.减轻服务器压力
+// 2.避免使用组件延时加载插件引起的节点重排
 export const lazyRequest = {
   bind: function(element, binding, node) {
     let value = binding.expression || 'query'
@@ -131,6 +134,7 @@ export const lazyImage = {
     let listen = new IntersectionObserver(entries => {
       entries.forEach(item => {
         if (item.isIntersecting) {
+          // 添加动画
           element.classList.add('show')
           setTimeout(() => {
             // element.src = binding.value
@@ -148,14 +152,22 @@ export const lazyImage = {
 
 // 操作栏吸顶
 export const actionTab = {
-  bind: function(element, binding) {
+  inserted: function(element, binding) {
+    var e = document.querySelector(`.${binding.expression}`)
+
+    ;(window.onresize = function() {
+      e.style.width = `${element.clientWidth}px`
+    })()
+
     let listen = new IntersectionObserver(entries => {
       let item = entries[0]
       let top = item.boundingClientRect.top
-      let e = document.querySelector(`.${binding.expression}`)
-      if (top < 0) {
+      if ((top < 130 || top < 0) && top != 0) {
+        e.style.top = `111px`
         e.style.position = 'fixed'
-      } else {
+      }
+      if (item.isIntersecting) {
+        e.style.top = `0px`
         e.style.position = 'relative'
       }
     })

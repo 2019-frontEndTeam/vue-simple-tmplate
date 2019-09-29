@@ -17,7 +17,25 @@ import {
   Notification,
   Table,
   TableColumn,
-  Loading
+  Loading,
+  Container,
+  Header,
+  Menu,
+  Submenu,
+  MenuItem,
+  MenuItemGroup,
+  Card,
+  Icon,
+  Main,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Backtop,
+  Tabs,
+  TabPane,
+  Tag,
+  Row,
+  Col
 } from 'element-ui'
 import './theme/index.css'
 
@@ -33,10 +51,27 @@ Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(Table)
 Vue.use(TableColumn)
-
-Vue.use(Loading.directive);
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Card)
+Vue.use(Icon)
+Vue.use(Main)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Backtop)
+Vue.use(Tabs)
+Vue.use(TabPane)
+Vue.use(Tag)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Loading.directive)
 Vue.prototype.$notify = Notification
-Vue.prototype.$loading = Loading.service;
+Vue.prototype.$loading = Loading.service
 
 // 引入接口文档
 import './api'
@@ -55,6 +90,11 @@ Object.keys(directives).forEach(directiveName => {
 
 // 全局函数
 import '@/utils/func'
+
+// 按需引入echarts
+
+const echarts = equire(['line', 'tooltip','title','pie','legend','bar'])
+Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 

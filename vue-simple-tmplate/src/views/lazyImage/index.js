@@ -1,3 +1,12 @@
+/*
+ * title 标题
+ * field 提交字段
+ * required 是否校验
+ * data 组件的数据
+ * name 数据渲染的名字
+ * id 数据渲染的id
+ * component 渲染的组件
+ */
 export const componentList = [
   {
     title: '姓名',
