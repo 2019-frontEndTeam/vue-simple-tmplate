@@ -52,7 +52,7 @@
         this.$refs.loginForm.validate(valid => {
           if (valid) {
             this.$router.push({
-              path: '/index'
+              path: '/lazyImage'
             })
           }
         })

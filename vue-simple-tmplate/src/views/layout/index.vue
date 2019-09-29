@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <el-container style="height: 100vh;">
-      <Menu :route="route" :index="index" :isCollapse="isCollapse"></Menu>
+      <side-menu :route="route" :index="index" :isCollapse="isCollapse"></side-menu>
       <el-container>
         <el-header>
           <div @click="switchChange">
@@ -18,7 +18,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </el-header>
-        <historyNav :activeName="activeName" :breadcrumb="breadcrumb"></historyNav>
+        <history-nav :activeName="activeName" :breadcrumb="breadcrumb"></history-nav>
         <el-main>
           <app-main></app-main>
         </el-main>
@@ -30,11 +30,11 @@
 <script>
   import historyNav from './historyNav.vue'
   import appMain from './appMain'
-  import Menu from './Menu.vue'
+  import sideMenu from './sideMenu.vue'
   export default {
     components: {
-      Menu,
       appMain,
+      sideMenu,
       historyNav
     },
     data() {
@@ -54,6 +54,7 @@
       }
     },
     created() {
+      this.$fn.init(this);
       this.breadcrumb = [{ name: this.$route.name, path: this.$route.path }];
       this.route = this.$router.options.routes[1].children;
       this.index = this.$route.meta.index;

@@ -25,9 +25,9 @@
         type: Number,
         default: 30
       },
-      height:{
-        type:String,
-        default:'200px'
+      height: {
+        type: String,
+        default: '200px'
       }
     },
     data() {
@@ -81,6 +81,7 @@
     overflow: hidden;
     scroll-behavior: smooth;
     height: inherit;
+
     .parent {
       width: max-content;
       height: inherit;
@@ -90,6 +91,7 @@
       div {
         transition: all .2s;
         cursor: pointer;
+
         &:hover {
           transform: scale(1.2);
         }

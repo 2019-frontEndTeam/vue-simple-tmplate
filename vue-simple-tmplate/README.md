@@ -11,6 +11,4 @@
 3、echarts组件
 
 三、自定义组件
-1、滑动组件
-
-四、ElementUi样式库
+1、滑动组件（使用了scroll-behavior:smooth，ie和safari浏览器不兼容）

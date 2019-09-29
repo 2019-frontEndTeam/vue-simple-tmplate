@@ -45,10 +45,10 @@ const fn = {
     return true
   },
   // 滚动分页
-  scrollPaging(totalData, data, row = 20) {
+  scrollPaging(totalData, tableData, row = 20) {
     for (var i = that.page * row - row; i < that.page * row; i++) {
       if (!fn.isEmptyObject(totalData[i])) {
-        data.push(totalData[i])
+        tableData.push(totalData[i])
       }
     }
   },

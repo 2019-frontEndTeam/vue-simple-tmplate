@@ -1,9 +1,9 @@
 <template>
-  <div class="other">
+  <div class="echarts">
     <!-- 滑动组件 -->
-    <vue-touchmove type="distance" distance="50" @click="clickHandle">
+    <vue-touchmove class="mg" type="distance" distance="50" @click="clickHandle">
       <template v-slot:list>
-        <el-card v-for="item in 100" :key="item" style="width: 150px;margin: 20px;">
+        <el-card v-for="item in 30" :key="item" style="width: 150px;margin: 20px;">
           点我{{item}}
         </el-card>
       </template>
@@ -22,8 +22,28 @@
       </template>
     </vue-modal>
     <!-- echarts组件 -->
-    <vue-echart :option="echartOption3"></vue-echart>
-    <vue-echart :option="echartOption4"></vue-echart>
+    <el-row>
+      <el-col class="pd" :lg="{span:12}" :span="24">
+        <el-card shadow="hover">
+          <vue-echart :option="echartOption3"></vue-echart>
+        </el-card>
+      </el-col>
+      <el-col class="pd" :lg="{span:12}" :span="24">
+        <el-card shadow="hover">
+          <vue-echart :option="echartOption4"></vue-echart>
+        </el-card>
+      </el-col>
+      <el-col class="pd" :lg="{span:12}" :span="24">
+        <el-card shadow="hover">
+          <vue-echart :option="echartOption1"></vue-echart>
+        </el-card>
+      </el-col>
+      <el-col class="pd" :lg="{span:12}" :span="24">
+        <el-card shadow="hover">
+          <vue-echart :option="echartOption2"></vue-echart>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 <script>

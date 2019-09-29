@@ -83,6 +83,15 @@ div {
   }
 }
 
+// 表格loading旋转
+.rotate-loading {
+  i {
+    font-size: 30px;
+    color: #0178f4;
+    animation: rotating 1s linear infinite;
+  }
+}
+
 /* 框架 */
 .el-tabs__active-bar{
   border-radius:5px;

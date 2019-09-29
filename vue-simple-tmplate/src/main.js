@@ -33,7 +33,9 @@ import {
   Backtop,
   Tabs,
   TabPane,
-  Tag
+  Tag,
+  Row,
+  Col
 } from 'element-ui'
 import './theme/index.css'
 
@@ -65,6 +67,8 @@ Vue.use(Backtop)
 Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Tag)
+Vue.use(Row)
+Vue.use(Col)
 Vue.use(Loading.directive)
 Vue.prototype.$notify = Notification
 Vue.prototype.$loading = Loading.service

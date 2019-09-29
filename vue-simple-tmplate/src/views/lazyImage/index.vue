@@ -1,5 +1,5 @@
 <template>
-  <div class="index">
+  <div class="lazyImage">
     <!-- 吸顶，需要参照物 -->
     <div v-actionTab="actionTab"></div>
     <div class="actionTab pd" style="overflow: hidden;">
@@ -18,11 +18,6 @@
     <div class="text-center" v-once>
       <img class="pd mg img" v-for="(item,index) in 50" v-lazyImage="item.value" :key="index" src="@/assets/logo.png" />
     </div>
-    <el-table height="500" element-loading-spinner="el-icon-orange" element-loading-background="rgba(255,255,255,.7)"
-      element-loading-custom-class="rotate-loading" v-loading="loading" border :data="tableData" v-lazyRequest>
-      <el-table-column prop="value" label="#" align="center"></el-table-column>
-      <el-table-column prop="label" label="姓名" align="center"></el-table-column>
-    </el-table>
   </div>
 </template>
 <script>
@@ -42,10 +37,8 @@
         list: list,
         value1: '1,2,3',
         value2: '',
-        loading: true,
         disabled: false,
         visible: false,
-        tableData: [],
         selectList: [],
         componentList: componentList
       };
@@ -72,28 +65,14 @@
         // 响应处理
         this.$fn.responseHandle(200, "保存成功", { visible: false });
       },
-      query() {
-        // this.$api.listApi()
-        this.tableData = this.list;
-        this.loading = false;
-      },
       openHandle() {
         this.formData = {
-          inputValue:'我18岁了'
+          inputValue: '我18岁了'
         }
       }
     }
   };
 </script>
-<style lang="scss">
-  .rotate-loading {
-    i {
-      font-size: 30px;
-      color: #0178f4;
-      animation: rotating 1s linear infinite;
-    }
-  }
-</style>
 <style lang="scss" scoped>
   .actionTab {
     z-index: 99;

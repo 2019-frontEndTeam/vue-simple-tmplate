@@ -19,21 +19,29 @@ export default new Router({
       component: layout,
       children: [
         {
-          path: '/index',
-          name: '主页',
-          component: _import('/index'),
+          path: '/lazyImage',
+          name: '图片懒加载',
+          component: _import('/lazyImage'),
           meta: {
             index: 0
           }
         },
         {
-          path: '/other',
-          name: '其他',
-          component: _import('/other'),
+          path: '/echarts',
+          name: '图表展示',
+          component: _import('/echarts'),
           meta: {
             index: 1
           }
-        }
+        },
+        {
+          path: '/lazyRequest',
+          name: '请求懒加载',
+          component: _import('/lazyRequest'),
+          meta: {
+            index: 2
+          }
+        },
       ]
     }
   ]

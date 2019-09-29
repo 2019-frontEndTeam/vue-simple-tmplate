@@ -27,10 +27,18 @@
       removeTab(path) {
         this.breadcrumb.forEach((v, i) => {
           if (path == v.path) {
-            this.breadcrumb.splice(i, 1);
+            if (path != this.activeName) {
+              this.breadcrumb.splice(i, 1);
+            } else {
+              if (i == this.breadcrumb.length - 1) {
+                this.$router.push(this.breadcrumb[this.breadcrumb.length - 2].path);
+              } else {
+                this.$router.push(this.breadcrumb[i + 1].path);
+              }
+              this.breadcrumb.splice(i, 1);
+            }
           }
         })
-        this.$router.push(this.breadcrumb[this.breadcrumb.length - 1].path);
       }
     },
   }
@@ -42,7 +50,7 @@
   .historyNav {
     padding: 10px 10px 0px 10px;
 
-    .el-tabs__header{
+    .el-tabs__header {
       margin: 0px;
     }
   }
