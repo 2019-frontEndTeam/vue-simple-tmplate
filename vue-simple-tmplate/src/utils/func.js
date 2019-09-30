@@ -176,6 +176,66 @@ const fn = {
         }
       })
       .catch(() => {})
+  },
+  // 表格框选
+  boxChoose() {
+    document.onmousedown = e => {
+      let div = document.createElement('div')
+      div.style.top = e.y + 'px'
+      div.style.left = e.x + 'px'
+      div.style.position = 'fixed'
+      div.style.transformOrigin = '0 0'
+      div.style.background = 'rgba(0,0,0,0.2)'
+      document.body.appendChild(div)
+
+      let tbodys = document.querySelectorAll('.el-table__body tbody'),
+        rows = []
+      for (var val of tbodys) {
+        rows.push(...val.children)
+      }
+
+      document.onmousemove = event => {
+        if (e.x < event.x) {
+          // 从右往下
+          div.style.transform = 'rotate(0)'
+          div.style.width = event.x - e.x + 'px'
+          div.style.height = event.y - e.y + 'px'
+          for (let i = 0; i < rows.length; i++) {
+            if (
+              rows[i].getBoundingClientRect().y + rows[i].clientHeight > e.y &&
+              rows[i].getBoundingClientRect().y < event.y
+            ) {
+              rows[i].style.background = '#fef0f0'
+            } else {
+              rows[i].style.background = 'none'
+            }
+          }
+        } else if (e.x > event.x) {
+          // 从左往上
+          div.style.transform = 'rotate(180deg)'
+          div.style.width = e.x - event.x + 'px'
+          div.style.height = e.y - event.y + 'px'
+          for (let i = 0; i < rows.length; i++) {
+            if (
+              rows[i].getBoundingClientRect().y < e.y &&
+              rows[i].getBoundingClientRect().y > event.y - rows[i].clientHeight
+            ) {
+              rows[i].style.background = '#fef0f0'
+            } else {
+              rows[i].style.background = 'none'
+            }
+          }
+        } else {
+          for (let i = 0; i < rows.length; i++) {
+            rows[i].style.background = 'none'
+          }
+        }
+      }
+      document.onmouseup = event => {
+        document.body.removeChild(div)
+        document.onmousemove = null
+      }
+    }
   }
 }
 Vue.prototype.$fn = fn

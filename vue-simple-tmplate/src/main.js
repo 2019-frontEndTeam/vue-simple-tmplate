@@ -35,7 +35,8 @@ import {
   TabPane,
   Tag,
   Row,
-  Col
+  Col,
+  Popover
 } from 'element-ui'
 import './theme/index.css'
 
@@ -69,6 +70,7 @@ Vue.use(TabPane)
 Vue.use(Tag)
 Vue.use(Row)
 Vue.use(Col)
+Vue.use(Popover)
 Vue.use(Loading.directive)
 Vue.prototype.$notify = Notification
 Vue.prototype.$loading = Loading.service
