@@ -97,7 +97,17 @@
   }
 
   .el-menu-item.is-active {
-    background-color: #1890ff !important;
-    color: #fff !important;
+    background-color: #1890ff3b !important;
+    color: #e6a23c !important;
+
+    &::before {
+      width: 5px;
+      background: red;
+      content: "";
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   }
 </style>
