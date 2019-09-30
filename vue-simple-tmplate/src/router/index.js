@@ -42,6 +42,14 @@ export default new Router({
             index: 2
           }
         },
+        {
+          path: '/map',
+          name: '异步加载地图',
+          component: _import('/map'),
+          meta: {
+            index: 3
+          }
+        },
       ]
     }
   ]
