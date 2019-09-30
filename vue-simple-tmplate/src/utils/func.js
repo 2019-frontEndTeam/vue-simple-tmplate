@@ -178,8 +178,13 @@ const fn = {
       .catch(() => {})
   },
   // 表格框选
-  boxChoose() {
-    document.onmousedown = e => {
+  boxChoose(element) {
+    element.onmousedown = e => {
+      if (e.button == 2) {
+        element.onmousemove = null
+        element.onmouseup = null
+        return
+      }
       let div = document.createElement('div')
       div.style.top = e.y + 'px'
       div.style.left = e.x + 'px'
@@ -193,8 +198,10 @@ const fn = {
       for (var val of tbodys) {
         rows.push(...val.children)
       }
-
-      document.onmousemove = event => {
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].style.background = 'none'
+      }
+      element.onmousemove = event => {
         if (e.x < event.x) {
           // 从右往下
           div.style.transform = 'rotate(0)'
@@ -225,15 +232,11 @@ const fn = {
               rows[i].style.background = 'none'
             }
           }
-        } else {
-          for (let i = 0; i < rows.length; i++) {
-            rows[i].style.background = 'none'
-          }
         }
       }
-      document.onmouseup = event => {
+      element.onmouseup = event => {
         document.body.removeChild(div)
-        document.onmousemove = null
+        element.onmousemove = null
       }
     }
   }
