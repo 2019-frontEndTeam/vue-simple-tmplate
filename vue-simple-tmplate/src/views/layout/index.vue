@@ -8,10 +8,10 @@
             <i class="el-icon-s-fold fl switch" ref="switch"></i>
           </div>
           <el-dropdown trigger="click" class="fr">
-             <svg-icon icon-class="user"></svg-icon>
-            <i class="el-icon-setting">
-              <span style="padding: 10px;">大帅比</span>
-            </i>
+            <div>
+              <svg-icon icon-class="user" style="font-size: 20px;" />
+              <span>大帅比</span>
+            </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
                 <span @click="exit">退出</span>

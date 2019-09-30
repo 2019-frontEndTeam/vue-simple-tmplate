@@ -8,7 +8,7 @@
       <div v-for="item in route">
         <el-menu-item v-if="!item.children && item.hidden != true" :index="item.meta.index" :route="item.path"
           :key="item.meta.index">
-          <i class="el-icon-setting"></i>
+          <i :class="item.icon"></i>
           <span slot="title">{{item.name}}</span>
         </el-menu-item>
         <el-submenu v-if="item.children && item.hidden != true" :index="item.meta.index" :route="item.path"

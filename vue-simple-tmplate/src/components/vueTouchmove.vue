@@ -40,6 +40,9 @@
         this.width = this.$refs.overflow.clientWidth;
       })()
     },
+    beforeDestroy() {
+      window.onresize = null;
+    },
     methods: {
       clickHandle(e) {
         if (e.target.className != 'parent') {
