@@ -25,13 +25,12 @@
         </el-main>
       </el-container>
     </el-container>
-    <el-backtop target=".el-main"></el-backtop>
   </div>
 </template>
 <script>
-  import historyNav from './historyNav.vue'
   import appMain from './appMain'
   import sideMenu from './sideMenu.vue'
+  import historyNav from './historyNav.vue'
   export default {
     components: {
       appMain,
@@ -71,11 +70,10 @@
       switchChange() {
         if (this.isCollapse) {
           this.$refs.switch.classList.add('rotate');
-          this.isCollapse = false;
         } else {
           this.$refs.switch.classList.remove('rotate');
-          this.isCollapse = true;
         }
+        this.isCollapse = !this.isCollapse;
       }
     }
   }

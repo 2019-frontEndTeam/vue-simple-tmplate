@@ -238,7 +238,49 @@ const fn = {
         document.body.removeChild(div)
         element.onmousemove = null
       }
+      element.onmouseleave = event => {
+        document.body.removeChild(div)
+        element.onmousemove = null
+      }
     }
-  }
+  },
+   /*echarts 数据中间丢失，取两边丢失数据的斜率估算this.$fn.getFakeY*/
+   getFakeY(dataArr) {
+    let resArr = [...dataArr]
+    dataArr.forEach((item, index) => {
+      if (item == null) {
+        /*前面没有数据处理不了直接return*/
+        if (index == 0 || resArr[index - 1] == null) {
+          return
+        }
+        let dataNum = 0 //预估增量
+        for (let i = index; i < dataArr.length; i++) {
+          let maxData = resArr[i]
+          if (maxData != null) {
+            dataNum = (resArr[i] - resArr[index - 1]) / (i - (index - 1))
+            console.log(
+              '进行估算：' + Math.round(resArr[index - 1] + dataNum)
+            )
+            resArr[index] = Math.round(resArr[index - 1] + dataNum)
+            return
+          }
+        }
+      } else {
+        resArr[index] = dataArr[index]
+      }
+    })
+    let isAllNull = true
+    dataArr.forEach(item => {
+      if (item != null) {
+        isAllNull = false
+        return
+      }
+    })
+
+    if (isAllNull) {
+      resArr = []
+    }
+    return resArr
+  },
 }
 Vue.prototype.$fn = fn

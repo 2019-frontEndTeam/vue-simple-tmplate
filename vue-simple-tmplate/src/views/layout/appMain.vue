@@ -8,6 +8,7 @@
         <router-view v-if="$route.path == '/map'" v-show="true"></router-view>
       </keep-alive>
     </transition>
+    <el-backtop target=".app-main"></el-backtop>
   </section>
 </template>
 
@@ -18,8 +19,9 @@
 </script>
 <style scoped>
   .app-main {
-    height: inherit;
+    height: 100%;
     box-sizing: border-box;
     padding: 20px;
+    overflow: auto;
   }
 </style>

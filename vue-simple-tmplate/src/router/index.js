@@ -21,7 +21,7 @@ export default new Router({
         {
           path: '/lazyImage',
           name: '图片懒加载',
-          icon:'el-icon-tickets',
+          icon: 'el-icon-tickets',
           component: _import('/lazyImage'),
           meta: {
             index: 0
@@ -30,7 +30,7 @@ export default new Router({
         {
           path: '/echarts',
           name: '图表展示',
-          icon:'el-icon-odometer',
+          icon: 'el-icon-odometer',
           component: _import('/echarts'),
           meta: {
             index: 1
@@ -39,7 +39,7 @@ export default new Router({
         {
           path: '/lazyRequest',
           name: '请求懒加载',
-          icon:'el-icon-loading',
+          icon: 'el-icon-loading',
           component: _import('/lazyRequest'),
           meta: {
             index: 2
@@ -48,12 +48,21 @@ export default new Router({
         {
           path: '/map',
           name: '异步加载地图',
-          icon:'el-icon-s-promotion',
+          icon: 'el-icon-s-promotion',
           component: _import('/map'),
           meta: {
             index: 3
           }
         },
+        {
+          path: '/table',
+          name: '表格其他功能',
+          icon: 'el-icon-coin',
+          component: _import('/table'),
+          meta: {
+            index: 4
+          }
+        }
       ]
     }
   ]

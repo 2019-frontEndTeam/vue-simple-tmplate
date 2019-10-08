@@ -174,3 +174,44 @@ export const actionTab = {
     listen.observe(element)
   }
 }
+
+// elementUI表格滚动分页
+export const tableScroll = {
+  bind: function(element, binding) {
+    let { totalData, tableData, row = 20, page = 1 } = binding.value
+    for (let i = 0; i < row; i++) {
+      tableData.push(totalData[i])
+    }
+    element.addEventListener(
+      'scroll',
+      e => {
+        if (tableData.length >= totalData.length) {
+          return
+        }
+        let scrollY = e.target.scrollTop + e.target.clientHeight
+        if (scrollY > e.target.scrollHeight - 300) {
+          page++
+          for (var i = page * row - row; i < page * row; i++) {
+            tableData.push(totalData[i])
+          }
+        }
+      },
+      true
+    )
+  }
+}
+
+// elementUI表格动态高度
+export const tableH = {
+  componentUpdated: function(element, binding, vnode) {
+    console.log(vnode,new Vue(element))
+    ;(window.onresize = () => {
+      let appE = document.querySelector('.app-main')
+      document.querySelector(
+        '.is-scrolling-none'
+      ).style.height = `${appE.clientHeight - 80}px`
+      document.querySelector('.is-scrolling-none').style.overflow =
+        'scroll overlay'
+    })()
+  }
+}

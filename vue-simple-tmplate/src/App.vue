@@ -15,4 +15,7 @@
 
 <style lang="scss">
   @import "./styles/index.scss";
+  .amap-sug-result {
+    position: fixed;
+  }
 </style>

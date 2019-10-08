@@ -1,12 +1,7 @@
 <template>
   <div class="lazyRequest">
-    <el-popover ref="popover" trigger="hover">
-      <el-button type="success" @click="$refs.popover.doClose()">修改</el-button>
-      <el-button type="danger" @click="$refs.popover.doClose()">删除</el-button>
-    </el-popover>
-    <el-table height="500" @row-contextmenu="rowContextmenu" element-loading-spinner="el-icon-orange"
-      element-loading-background="rgba(255,255,255,.7)" element-loading-custom-class="rotate-loading"
-      v-loading="loading1" :data="tableData" v-lazyRequest="query1">
+    <el-table height="500" element-loading-spinner="el-icon-orange" element-loading-background="rgba(255,255,255,.7)"
+      element-loading-custom-class="rotate-loading" v-loading="loading1" :data="tableData" v-lazyRequest="query1">
       <el-table-column prop="value" label="#" align="center"></el-table-column>
       <el-table-column prop="label" label="姓名" align="center"></el-table-column>
     </el-table>
@@ -37,17 +32,7 @@
         loading3: true,
       }
     },
-    mounted() {
-      this.$fn.boxChoose(this.$el);
-    },
     methods: {
-      rowContextmenu(row, col, event) {
-        event.preventDefault();
-        let popover = this.$refs.popover.$el.children[0].style;
-        popover.left = event.x - 5 + 'px';
-        popover.top = event.y - 5 + 'px';
-        this.$refs.popover.doShow()
-      },
       query1() {
         this.loading1 = false;
       },
@@ -60,11 +45,6 @@
     },
   }
 </script>
-<style>
-  .el-table .warning-row {
-    background: oldlace;
-  }
-</style>
 <style scoped>
   .lazyRequest {
     user-select: none;
