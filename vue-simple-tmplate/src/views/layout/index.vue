@@ -56,7 +56,7 @@
     created() {
       this.$fn.init(this);
       this.breadcrumb = [{ name: this.$route.name, path: this.$route.path }];
-      this.route = this.$router.options.routes[1].children;
+      this.route = this.$store.state.user.menus;
       this.index = this.$route.meta.index;
       this.activeName = this.$route.path;
 

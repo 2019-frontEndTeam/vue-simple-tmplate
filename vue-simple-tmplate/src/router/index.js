@@ -9,6 +9,7 @@ import redirect404 from '@/views/404'
 import { dynamicRoutes } from './dynamicRoutes'
 Vue.use(Router)
 
+store.commit('SET_MENU', dynamicRoutes)
 store.commit('SET_ROUTES', dynamicRoutes)
 
 const router = new Router({
