@@ -16,14 +16,18 @@ const user = {
       state.token = token
     },
     SET_MENU: (state, menus) => {
+      // 菜单展示
       state.menus = menus
     },
-    SET_ROUTES: (state, data) => {
-      data.forEach((v, i) => {
+    SET_ROUTES: (state, routes) => {
+      // 递归抽取子级菜单（父级不需要注册路由）
+      routes.forEach((v, i) => {
         if (v.children) {
           store.commit('SET_ROUTES', v.children)
         } else {
+          // 注册路由
           v.component = _import(v.path)
+          // 存储抽取的路由
           state.routes.push(v)
         }
       })

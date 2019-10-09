@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-menu :collapse="!isCollapse" class="el-menu-vertical-demo" :default-active="index" router
-      background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+    <el-menu :collapse="!isCollapse" :unique-opened="true" class="el-menu-vertical-demo"
+      :default-active="index" router background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
       <div class="logo">
         <h1>vue-template</h1>
       </div>
@@ -11,11 +11,10 @@
           <i :class="item.icon"></i>
           <span slot="title">{{item.name}}</span>
         </el-menu-item>
-        <el-submenu v-if="item.children && item.hidden != true" :index="item.meta.index" :route="item.path"
-          :key="item.meta.index">
+        <el-submenu v-if="item.children && item.hidden != true" :index="item.id" :key="item.id">
           <template slot="title">
-            <i class="el-icon-setting"></i>
-            <span slot="title">{{item.name}}</span>
+            <i :class="item.icon"></i>
+            <span slot="title" v-show="isCollapse">{{item.name}}</span>
           </template>
           <el-menu-item-group>
             <el-menu-item v-for="itemChildren in item.children" :index="itemChildren.meta.index"
