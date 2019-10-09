@@ -1,11 +1,19 @@
 <template>
   <section class="app-main">
-    <transition name="el-zoom-in-bottom">
+    <!-- <transition name="el-zoom-in-bottom">
       <router-view v-if="$route.path != '/map'" v-show="true"></router-view>
     </transition>
     <transition name="el-zoom-in-bottom">
       <keep-alive>
         <router-view v-if="$route.path == '/map'" v-show="true"></router-view>
+      </keep-alive>
+    </transition> -->
+    <transition name="fade-transform" mode="out-in">
+      <router-view v-if="$route.path != '/map'" />
+    </transition>
+    <transition name="fade-transform" mode="out-in">
+      <keep-alive>
+        <router-view v-if="$route.path == '/map'" />
       </keep-alive>
     </transition>
     <el-backtop target=".app-main"></el-backtop>
@@ -17,11 +25,27 @@
     name: 'AppMain',
   }
 </script>
-<style scoped>
+<style lang="scss" scoped>
   .app-main {
     height: 100%;
+    width: 100%;
     box-sizing: border-box;
     padding: 20px;
     overflow: auto;
+  }
+
+  .fade-transform-leave-active,
+  .fade-transform-enter-active {
+    transition: all .5s;
+  }
+
+  .fade-transform-enter {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .fade-transform-leave-to {
+    opacity: 0;
+    transform: translateX(20px);
   }
 </style>

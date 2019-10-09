@@ -204,7 +204,6 @@ export const tableScroll = {
 // elementUI表格动态高度
 export const tableH = {
   componentUpdated: function(element, binding, vnode) {
-    console.log(vnode,new Vue(element))
     ;(window.onresize = () => {
       let appE = document.querySelector('.app-main')
       document.querySelector(

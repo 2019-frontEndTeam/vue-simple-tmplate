@@ -93,6 +93,9 @@ Object.keys(directives).forEach(directiveName => {
   Vue.directive(directiveName, directives[directiveName])
 })
 
+// 水波纹
+import './utils/waves'
+
 // 全局函数
 import '@/utils/func'
 

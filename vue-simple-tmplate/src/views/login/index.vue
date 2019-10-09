@@ -1,8 +1,8 @@
 <template>
   <div class="login-container">
     <div class="login">
-      <el-form autocomplete="on" :model="loginForm" :rules="loginRules" ref="loginForm"
-        label-position="left" label-width="0px" class="card-box login-form">
+      <el-form autocomplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left"
+        label-width="0px" class="card-box login-form">
         <el-form-item prop="username">
           <el-input name="username" type="text" v-model="loginForm.username" autocomplete="on" placeholder="用户名" />
         </el-form-item>
@@ -11,7 +11,7 @@
             autocomplete="on" placeholder="密码" show-password></el-input>
         </el-form-item>
         <el-form-item align='center'>
-          <el-button type="primary" @click.native.prevent="handleLogin">登录</el-button>
+          <el-button v-waves type="primary" @click.native.prevent="handleLogin">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
