@@ -1,12 +1,17 @@
 import Vue from 'vue'
+import store from '@/store'
 import Router from 'vue-router'
-// 异步加载路由
-import _import from './import'
+// 异步加载路由
 import login from '@/views/login'
 import layout from '@/views/layout'
+import redirect404 from '@/views/404'
+// 模拟菜单接口
+import { dynamicRoutes } from './dynamicRoutes'
 Vue.use(Router)
 
-export default new Router({
+store.commit('SET_ROUTES', dynamicRoutes)
+
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -17,53 +22,25 @@ export default new Router({
       path: '/layout',
       name: '主页',
       component: layout,
-      children: [
-        {
-          path: '/lazyImage',
-          name: '图片懒加载',
-          icon: 'el-icon-tickets',
-          component: _import('/lazyImage'),
-          meta: {
-            index: 0
-          }
+      children: store.state.user.routes.concat({
+        path: '/404',
+        name: '404',
+        meta: {
+          index: -1
         },
-        {
-          path: '/echarts',
-          name: '图表展示',
-          icon: 'el-icon-odometer',
-          component: _import('/echarts'),
-          meta: {
-            index: 1
-          }
-        },
-        {
-          path: '/lazyRequest',
-          name: '请求懒加载',
-          icon: 'el-icon-loading',
-          component: _import('/lazyRequest'),
-          meta: {
-            index: 2
-          }
-        },
-        {
-          path: '/map',
-          name: '异步加载地图',
-          icon: 'el-icon-s-promotion',
-          component: _import('/map'),
-          meta: {
-            index: 3
-          }
-        },
-        {
-          path: '/table',
-          name: '表格其他功能',
-          icon: 'el-icon-coin',
-          component: _import('/table'),
-          meta: {
-            index: 4
-          }
-        }
-      ]
+        hidden: true,
+        component: redirect404
+      })
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.length == 0) {
+    next('/404')
+  } else {
+    next()
+  }
+})
+
+export default router

@@ -13,23 +13,24 @@
       <el-table-column prop="label" label="姓名" align="center"></el-table-column>
     </el-table>
     <div class="arrow">↓</div>
-    <el-table height="500" element-loading-spinner="el-icon-orange" element-loading-background="rgba(255,255,255,.7)"
-      element-loading-custom-class="rotate-loading" v-loading="loading3" border :data="tableData"
-      v-lazyRequest="query3">
-      <el-table-column prop="value" label="#" align="center"></el-table-column>
-      <el-table-column prop="label" label="姓名" align="center"></el-table-column>
-    </el-table>
+    <vue-echart :option="echartOption1" :loading="loading3" v-lazyRequest="query3"></vue-echart>
   </div>
 </template>
 <script>
   import { list } from './index.js';
+  import vueEchart from '@/components/vueEchart'
+  import { pieOption } from '../echarts/index.js'
   export default {
+    components: {
+      vueEchart
+    },
     data() {
       return {
         tableData: list,
         loading1: true,
         loading2: true,
         loading3: true,
+        echartOption1: JSON.parse(JSON.stringify(pieOption)),
       }
     },
     methods: {
@@ -41,6 +42,11 @@
       },
       query3() {
         this.loading3 = false;
+        this.echartOption1.series[0].data = [
+          { value: 11, name: '直接访问' },
+          { value: 321, name: '邮件营销' },
+          { value: 98, name: '联盟广告' },
+        ]
       },
     },
   }

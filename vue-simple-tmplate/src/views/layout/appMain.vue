@@ -1,13 +1,5 @@
 <template>
   <section class="app-main">
-    <!-- <transition name="el-zoom-in-bottom">
-      <router-view v-if="$route.path != '/map'" v-show="true"></router-view>
-    </transition>
-    <transition name="el-zoom-in-bottom">
-      <keep-alive>
-        <router-view v-if="$route.path == '/map'" v-show="true"></router-view>
-      </keep-alive>
-    </transition> -->
     <transition name="fade-transform" mode="out-in">
       <router-view v-if="$route.path != '/map'" />
     </transition>
@@ -19,7 +11,6 @@
     <el-backtop target=".app-main"></el-backtop>
   </section>
 </template>
-
 <script>
   export default {
     name: 'AppMain',
