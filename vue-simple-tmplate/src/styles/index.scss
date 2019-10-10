@@ -24,10 +24,6 @@ div {
   margin: 0;
 }
 
-.iblock {
-  display: inline-block;
-}
-
 .fl {
   float: left;
 }
@@ -44,7 +40,11 @@ div {
   margin: 20px;
 }
 
-.inline {
+.iline {
+  display: inline;
+}
+
+.iblock {
   display: inline-block;
 }
 

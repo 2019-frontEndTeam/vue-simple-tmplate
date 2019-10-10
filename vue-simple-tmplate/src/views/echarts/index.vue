@@ -1,9 +1,9 @@
 <template>
   <div class="echarts">
     <!-- 滑动组件 -->
-    <vue-touchmove class="mg" type="distance" distance="50" @click="clickHandle">
+    <vue-touchmove class="mg" distance="50" @click="clickHandle">
       <template v-slot:list>
-        <el-card v-for="item in 30" :key="item" style="width: 150px;margin: 20px;">
+        <el-card v-for="item in 50" :key="item" style="width: 150px;margin: 20px;">
           点我{{item}}
         </el-card>
       </template>

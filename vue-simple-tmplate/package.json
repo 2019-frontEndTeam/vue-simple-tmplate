@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "element-ui": "^2.12.0",
     "intersection-observer": "^0.7.0",
     "vue": "^2.5.2",

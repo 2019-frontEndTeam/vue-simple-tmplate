@@ -1,7 +1,7 @@
 <template>
   <div :style="'position: relative;height:'+height">
-    <div class="el-icon-back arrow arrow-left" @click="$refs.overflow.scrollLeft -= width"></div>
-    <div class="el-icon-right arrow arrow-right" @click="$refs.overflow.scrollLeft += width"></div>
+    <div class="el-icon-back arrow arrow-left" @click="move($refs.overflow,250,-1)"></div>
+    <div class="el-icon-right arrow arrow-right" @click="move($refs.overflow,250,1)"></div>
     <div ref="overflow" class="scroll">
       <div class="parent" @mousedown="mousedownHandle" @click="clickHandle">
         <slot name="list"></slot>
@@ -11,16 +11,7 @@
 </template>
 <script>
   export default {
-    /*
-    type：
-      distance：滑动距离*distance
-      spring：滑动时间*distance
-    */
     props: {
-      type: {
-        type: String,
-        default: 'distance'
-      },
       distance: {
         type: Number,
         default: 30
@@ -30,49 +21,48 @@
         default: '200px'
       }
     },
-    data() {
-      return {
-        width: 0
-      }
-    },
-    mounted() {
-      (window.onresize = () => {
-        this.width = this.$refs.overflow.clientWidth;
-      })()
-    },
-    beforeDestroy() {
-      window.onresize = null;
-    },
     methods: {
       clickHandle(e) {
         if (e.target.className != 'parent') {
           this.$emit('click', e);
         }
       },
+      move(element, distance, direction) {
+        var time;
+        clearInterval(time);
+        time = setInterval(() => {
+          distance -= 1;
+          element.scrollLeft += (distance / 50) * 2.5 * direction;
+          if (distance <= 0 || element.scrollLeft == 0 || element.scrollLeft == element.scrollWidth) {
+            clearInterval(time);
+          }
+        })
+        element.onmouseup = null;
+        element.onmousemove = null;
+        element.onmouseleave = null;
+      },
       mousedownHandle(event) {
         var distance = 0,
-          element = this.$refs.overflow;
+          element = this.$refs.overflow,
+          direction;
 
         element.onmousemove = (e) => {
-          if (this.type == 'spring') {
-            distance += parseInt(this.distance) * ((e.clientX > event.clientX) ? -1 : 1);
+          distance = (event.clientX - e.clientX);
+          if (distance < 0) {
+            direction = -1
           } else {
-            distance = (event.clientX - e.clientX);
+            direction = 1
           }
+          // 限定滑动距离上限
+          distance = Math.abs(distance) > 250 ? 250 : Math.abs(distance);
         }
 
         element.onmouseup = (e) => {
-          element.scrollLeft += distance;
-          element.onmouseup = null;
-          element.onmousemove = null;
-          element.onmouseleave = null;
+          this.move(element, distance, direction);
         }
 
         element.onmouseleave = (e) => {
-          element.scrollLeft += distance;
-          element.onmouseup = null;
-          element.onmousemove = null;
-          element.onmouseleave = null;
+          this.move(element, distance, direction);
         }
       },
     },
@@ -80,12 +70,11 @@
 </script>
 <style lang="scss" scoped>
   .scroll {
-    /* overflow: scroll hidden; */
     overflow: hidden;
-    scroll-behavior: smooth;
     height: inherit;
 
     .parent {
+      position: relative;
       width: max-content;
       height: inherit;
       display: flex;
