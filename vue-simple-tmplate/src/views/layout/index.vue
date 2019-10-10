@@ -7,14 +7,22 @@
           <div @click="switchChange">
             <i class="el-icon-s-fold fl switch" ref="switch"></i>
           </div>
-          <el-dropdown trigger="click" class="fr">
+          <el-dropdown trigger="click" class="fr" @command="handleCommand">
             <div>
               <svg-icon icon-class="user" style="font-size: 20px;" />
-              <span>大帅比</span>
+              <span>admin</span>
             </div>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>
-                <span @click="exit">退出</span>
+              <el-dropdown-item disabled>语言切换</el-dropdown-item>
+              <el-dropdown-item command="zh">
+                中文
+              </el-dropdown-item>
+              <el-dropdown-item command="en">
+                英文
+              </el-dropdown-item>
+              <el-dropdown-item disabled>其他操作</el-dropdown-item>
+              <el-dropdown-item command="exit">
+                退出
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -62,10 +70,14 @@
 
     },
     methods: {
-      exit() {
-        this.$router.push({
-          path: '/'
-        })
+      handleCommand(value) {
+        if (value != 'exit') {
+          this.$cl(value);
+        } else {
+          this.$router.push({
+            path: '/'
+          })
+        }
       },
       switchChange() {
         if (this.isCollapse) {

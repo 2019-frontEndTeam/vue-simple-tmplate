@@ -9,16 +9,16 @@
         <el-menu-item v-if="!item.children && item.hidden != true" :index="item.meta.index" :route="item.path"
           :key="item.meta.index">
           <i :class="item.icon"></i>
-          <span slot="title">{{item.name}}</span>
+          <span slot="title">{{$t(item.name)}}</span>
         </el-menu-item>
         <el-submenu v-if="item.children && item.hidden != true" :index="item.id" :key="item.id">
           <template slot="title">
             <i :class="item.icon"></i>
-            <span slot="title" v-show="isCollapse">{{item.name}}</span>
+            <span slot="title" v-show="isCollapse">{{$t(item.name)}}</span>
           </template>
           <el-menu-item-group>
             <el-menu-item v-for="itemChildren in item.children" :index="itemChildren.meta.index"
-              :route="itemChildren.path" :key="itemChildren.meta.index">{{itemChildren.name}}</el-menu-item>
+              :route="itemChildren.path" :key="itemChildren.meta.index">{{$t(item.name)}}</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </div>

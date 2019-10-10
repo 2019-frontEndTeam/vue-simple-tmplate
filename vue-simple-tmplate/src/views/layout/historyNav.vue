@@ -1,7 +1,7 @@
 <template>
   <el-tabs class="historyNav" v-model="activeName" type="card" :closable="breadcrumb.length > 1" @tab-remove="removeTab"
     @tab-click="clickTab">
-    <el-tab-pane v-for="item,index in breadcrumb" :key="index" :name="item.path" :label="item.name" />
+    <el-tab-pane v-for="item,index in breadcrumb" :key="index" :name="item.path" :label="$t(item.name)" />
   </el-tabs>
 </template>
 <script>
