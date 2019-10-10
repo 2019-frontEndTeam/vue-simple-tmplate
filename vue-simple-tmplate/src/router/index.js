@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import store from '@/store'
 import Router from 'vue-router'
-// 异步加载路由
 import login from '@/views/login'
 import layout from '@/views/layout'
 import redirect404 from '@/views/404'
+
 // 模拟菜单接口
 import { dynamicRoutes } from './dynamicRoutes'
-Vue.use(Router)
 
 store.commit('SET_MENU', dynamicRoutes)
+
 store.commit('SET_ROUTES', dynamicRoutes)
 
 const router = new Router({

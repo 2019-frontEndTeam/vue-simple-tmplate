@@ -1,5 +1,9 @@
 <template>
   <div class="lazyRequest">
+    <div class="text-center">
+        <drag-classify class="iblock" :key="1" :list="list1" :group="group" header-text="Todo" />
+        <drag-classify class="iblock" :key="2" :list="list2" :group="group" header-text="Working" />
+    </div>
     <el-table height="500" element-loading-spinner="el-icon-orange" element-loading-background="rgba(255,255,255,.7)"
       element-loading-custom-class="rotate-loading" v-loading="loading1" :data="tableData" v-lazyRequest="query1">
       <el-table-column prop="value" label="#" align="center"></el-table-column>
@@ -19,10 +23,12 @@
 <script>
   import { list } from './index.js';
   import vueEchart from '@/components/vueEchart'
+  import dragClassify from '@/components/dragClassify'
   import { pieOption } from '../echarts/index.js'
   export default {
     components: {
-      vueEchart
+      vueEchart,
+      dragClassify
     },
     data() {
       return {
@@ -31,6 +37,18 @@
         loading2: true,
         loading3: true,
         echartOption1: JSON.parse(JSON.stringify(pieOption)),
+        group: 'mission',
+        list1: [
+          { name: 'Mission', id: 1 },
+          { name: 'Mission', id: 2 },
+          { name: 'Mission', id: 3 },
+          { name: 'Mission', id: 4 }
+        ],
+        list2: [
+          { name: 'Mission', id: 5 },
+          { name: 'Mission', id: 6 },
+          { name: 'Mission', id: 7 }
+        ],
       }
     },
     methods: {

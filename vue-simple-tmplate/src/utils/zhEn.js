@@ -6,7 +6,6 @@ const zhEn = {
   },
   setText(value) {
     let config = {
-        index: '主页',
         lazyImage: '图片懒加载',
         echarts: '图表展示',
         lazyRequest: '请求懒加载',
