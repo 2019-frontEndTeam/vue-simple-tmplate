@@ -8,7 +8,7 @@ export function getToken() {
 
 export function setToken(token) {
   var date = new Date()
-  date.setTime(date.getTime() + 3600 * 8000) //1表示1秒钟，8小时后cookie失效
+  date.setTime(date.getTime() + 3600 * 2000) //1表示1秒钟，2小时后cookie失效
   return Cookies.set(TokenKey, token, { expires: date })
 }
 

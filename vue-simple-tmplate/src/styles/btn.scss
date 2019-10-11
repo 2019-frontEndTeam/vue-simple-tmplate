@@ -20,7 +20,7 @@ $red:#C03639;
 $pink: #E65D6E;
 $green: #30B08F;
 $tiffany: #4AB7BD;
-$yellow:#FEC171;
+$yellow:rgba(230, 162, 60, 0.6);
 $panGreen: #30B08F;
 
 .blue-btn {
@@ -55,7 +55,7 @@ $panGreen: #30B08F;
   font-size: 14px;
   color: #fff;
   padding: 14px 36px;
-  border-radius: 8px;
+  border-radius: 2px;
   border: none;
   outline: none;
   transition: 600ms ease all;
@@ -63,7 +63,7 @@ $panGreen: #30B08F;
   display: inline-block;
 
   &:hover {
-    background: #fff;
+    background: rgba(255,255,255,.1);
 
     &:before,
     &:after {

@@ -209,8 +209,8 @@ export const tableH = {
       document.querySelector(
         '.is-scrolling-none'
       ).style.height = `${appE.clientHeight - 80}px`
-      document.querySelector('.is-scrolling-none').style.overflow =
-        'scroll overlay'
+      document.querySelector('.is-scrolling-none').style.overflowX = 'scroll'
+      document.querySelector('.is-scrolling-none').style.overflowY = 'overlay'
     })()
   }
 }

@@ -7,14 +7,22 @@
           <div @click="switchChange">
             <i class="el-icon-s-fold fl switch" ref="switch"></i>
           </div>
-          <el-dropdown trigger="click" class="fr">
+          <el-dropdown trigger="click" class="fr" @command="handleCommand">
             <div>
               <svg-icon icon-class="user" style="font-size: 20px;" />
-              <span>大帅比</span>
+              <span>admin</span>
             </div>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>
-                <span @click="exit">退出</span>
+              <el-dropdown-item disabled>语言切换</el-dropdown-item>
+              <el-dropdown-item command="zh">
+                中文
+              </el-dropdown-item>
+              <el-dropdown-item command="en">
+                英文
+              </el-dropdown-item>
+              <el-dropdown-item disabled>其他操作</el-dropdown-item>
+              <el-dropdown-item command="exit">
+                退出
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -56,16 +64,18 @@
     created() {
       this.$fn.init(this);
       this.breadcrumb = [{ name: this.$route.name, path: this.$route.path }];
-      this.route = this.$router.options.routes[1].children;
+      this.route = this.$store.state.user.menus;
       this.index = this.$route.meta.index;
       this.activeName = this.$route.path;
 
     },
     methods: {
-      exit() {
-        this.$router.push({
-          path: '/'
-        })
+      handleCommand(value) {
+        if (value != 'exit') {
+          this.$c(value);
+        } else {
+          this.$store.dispatch('LogOut')
+        }
       },
       switchChange() {
         if (this.isCollapse) {
@@ -108,6 +118,10 @@
       background: #fff;
       box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
       line-height: 60px;
+    }
+
+    .el-container {
+      width: 100%;
     }
   }
 </style>

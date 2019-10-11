@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import 'babel-polyfill'
 import router from './router'
 import store from './store'
 import {
@@ -36,7 +37,9 @@ import {
   Tag,
   Row,
   Col,
-  Popover
+  Popover,
+  CollapseItem,
+  Switch
 } from 'element-ui'
 import './theme/index.css'
 
@@ -71,6 +74,8 @@ Vue.use(Tag)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Popover)
+Vue.use(CollapseItem)
+Vue.use(Switch)
 Vue.use(Loading.directive)
 Vue.prototype.$notify = Notification
 Vue.prototype.$loading = Loading.service
@@ -99,9 +104,11 @@ import './utils/waves'
 // 全局函数
 import '@/utils/func'
 
-// 按需引入echarts
+// 中英文
+import '@/utils/zhEn'
 
-const echarts = equire(['line', 'tooltip','title','pie','legend','bar'])
+// 按需引入echarts
+const echarts = equire(['line', 'tooltip', 'title', 'pie', 'legend', 'bar'])
 Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false

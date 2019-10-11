@@ -2,21 +2,22 @@
 div {
   img {
     &.show {
-     animation: up 1s ease;
+      animation: up 1s ease;
     }
   }
- }
+}
 
- @keyframes up {
-   from {
-     opacity: 0;
-     transform: translate(0px, 80px);
-   }
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translate(0px, 80px);
+  }
 
-   to {
-     opacity: 1;
-   }
- }
+  to {
+    opacity: 1;
+  }
+}
+
 /* 公共样式 */
 * {
   padding: 0;
@@ -39,7 +40,11 @@ div {
   margin: 20px;
 }
 
-.inline {
+.iline {
+  display: inline;
+}
+
+.iblock {
   display: inline-block;
 }
 
@@ -93,13 +98,15 @@ div {
 }
 
 /* 框架 */
-.el-tabs__active-bar{
-  border-radius:5px;
-  height:5px;
+.el-tabs__active-bar {
+  border-radius: 5px;
+  height: 5px;
 }
-.el-tabs__nav-wrap::after{
+
+.el-tabs__nav-wrap::after {
   height: 1px;
 }
+
 .el-radio__inner::after {
   width: 6px;
   height: 6px;
@@ -113,34 +120,36 @@ div {
   border-radius: 2px;
 }
 
-.el-table th{
+.el-table th {
   background: #f2f6fc;
   color: #606266;
 }
 
 @keyframes dialog-fade-in {
   0% {
-      transform: translate3d(0,100% , 0);
-      opacity: 0;
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
   }
+
   100% {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
   }
 }
 
 @keyframes dialog-fade-out {
   0% {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
   }
+
   100% {
-      transform: translate3d(0, 100%, 0);
-      opacity: 0;
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
   }
 }
 
-  /* 滚动条整体样式 */
+/* 滚动条整体样式 */
 
 ::-webkit-scrollbar {
   width: 10px;
