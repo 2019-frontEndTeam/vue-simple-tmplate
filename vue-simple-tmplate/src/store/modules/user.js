@@ -1,9 +1,11 @@
 import store from '@/store'
+import router from '@/router'
 import _import from '../../router/import'
+import { getToken, setToken, removeToken } from '@/utils/auth'
 const user = {
   state: {
     name: '',
-    token: '',
+    token: getToken(),
     routes: [],
     menus: []
   },
@@ -13,7 +15,7 @@ const user = {
       state.name = name
     },
     SET_TOKEN: (state, token) => {
-      state.token = token
+      setToken(token)
     },
     SET_MENU: (state, menus) => {
       // 菜单展示
@@ -33,6 +35,12 @@ const user = {
       })
     }
   },
-  actions: {}
+  actions: {
+    // 登出
+    LogOut({ commit }) {
+      removeToken()
+      router.push('/')
+    }
+  }
 }
 export default user

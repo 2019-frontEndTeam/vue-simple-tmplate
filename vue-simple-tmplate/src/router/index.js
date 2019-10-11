@@ -4,7 +4,8 @@ import Router from 'vue-router'
 import login from '@/views/login'
 import layout from '@/views/layout'
 import redirect404 from '@/views/404'
-
+import { getToken } from '@/utils/auth'
+import { Notification } from 'element-ui'
 // 模拟菜单接口
 import { dynamicRoutes } from './dynamicRoutes'
 
@@ -37,10 +38,22 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.length == 0) {
-    next('/404')
+  let token = getToken()
+  if (!token) {
+    if (to.path != '/') {
+      Notification.warning({
+        title: '请重新登录'
+      })
+      next('/')
+    } else {
+      next()
+    }
   } else {
-    next()
+    if (to.matched.length == 0) {
+      next('/404')
+    } else {
+      next()
+    }
   }
 })
 

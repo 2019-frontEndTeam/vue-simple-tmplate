@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <div class="login">
+    <div class="login" ref="login">
       <el-form autocomplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left"
         label-width="0px" class="card-box login-form">
         <el-form-item prop="username">
@@ -11,7 +11,8 @@
             autocomplete="on" placeholder="密码" show-password></el-input>
         </el-form-item>
         <el-form-item align='center'>
-          <el-button v-waves type="warning" style="width:100%;" @click.native.prevent="handleLogin">登录</el-button>
+          <el-button :loading="loading" v-waves class="pan-btn yellow-btn" style="width:100%;"
+            @click.native.prevent="handleLogin">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -23,10 +24,13 @@
     validateUsername,
     validatePass,
   } from '@/utils/rules.js'
+
   export default {
     name: 'login',
     data() {
       return {
+        loading: false,
+        transitionEvent: '',
         loginForm: {
           username: '',
           password: ''
@@ -47,13 +51,41 @@
         pwdType: 'password'
       }
     },
+    mounted() {
+    },
     methods: {
-      handleLogin() {
+      goto() {
+        setTimeout(() => {
+          this.$store.commit('SET_TOKEN', 'admin');
+          this.$router.push({
+            path: '/lazyImage'
+          })
+        }, 100)
+        this.$refs.login.removeEventListener(this.transitionEvent, this.goto);
+      },
+      handleLogin(e) {
         this.$refs.loginForm.validate(valid => {
           if (valid) {
-            this.$router.push({
-              path: '/lazyImage'
-            })
+            this.loading = true;
+            setTimeout(() => {
+              this.$refs.login.classList.add('close');
+              let transitions = {
+                'transition': 'transitionend',
+                'OTransition': 'oTransitionEnd',
+                'MozTransition': 'transitionend',
+                'WebkitTransition': 'webkitTransitionEnd'
+              }
+              // 处理动画回调的兼容性
+              for (let t in transitions) {
+                if (this.$refs.login.style[t] !== undefined) {
+                  this.transitionEvent = transitions[t]
+                }
+              }
+              // 动画结束后执行
+              this.$refs.login.addEventListener(this.transitionEvent, this.goto);
+
+              this.loading = false;
+            }, 1000)
           }
         })
       }
@@ -118,5 +150,23 @@
     left: 50%;
     top: 0;
     bottom: 0;
+    transition: 0.5s all;
+  }
+
+  .close {
+    width: 0;
+    margin: 0;
+    padding: 250px 0px;
+    overflow: hidden;
+  }
+
+  .pan-btn {
+    .el-icon-loading:before {
+      content: "\e6ab";
+    }
+
+    .el-icon-loading {
+      font-size: 16px;
+    }
   }
 </style>
