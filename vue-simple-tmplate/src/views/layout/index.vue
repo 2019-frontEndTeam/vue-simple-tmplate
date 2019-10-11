@@ -72,7 +72,7 @@
     methods: {
       handleCommand(value) {
         if (value != 'exit') {
-          this.$cl(value);
+          this.$c(value);
         } else {
           this.$router.push({
             path: '/'

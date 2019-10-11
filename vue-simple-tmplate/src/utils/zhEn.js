@@ -1,6 +1,6 @@
 var ln = localStorage.getItem('ln')
 const zhEn = {
-  changeLn(value) {
+  changeLng(value) {
     localStorage.setItem('ln', value)
     location.reload()
   },
@@ -26,4 +26,4 @@ const zhEn = {
   }
 }
 Vue.prototype.$t = zhEn.setText
-Vue.prototype.$cl = zhEn.changeLn
+Vue.prototype.$c = zhEn.changeLng

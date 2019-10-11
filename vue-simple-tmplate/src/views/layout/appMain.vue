@@ -18,7 +18,7 @@
 </script>
 <style lang="scss" scoped>
   .app-main {
-    height: 100%;
+    height: calc(100vh - 130px);
     width: 100%;
     box-sizing: border-box;
     padding: 20px;

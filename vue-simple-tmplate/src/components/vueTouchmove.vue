@@ -1,7 +1,7 @@
 <template>
-  <div :style="'position: relative;height:'+height">
-    <div class="el-icon-back arrow arrow-left" @click="move($refs.overflow,250,-1)"></div>
-    <div class="el-icon-right arrow arrow-right" @click="move($refs.overflow,250,1)"></div>
+  <div :style="styles">
+    <div class="el-icon-back arrow arrow-left" @click="move($refs.overflow,150,-1)"></div>
+    <div class="el-icon-right arrow arrow-right" @click="move($refs.overflow,150,1)"></div>
     <div ref="overflow" class="scroll">
       <div class="parent" @mousedown="mousedownHandle" @click="clickHandle">
         <slot name="list"></slot>
@@ -14,11 +14,16 @@
     props: {
       distance: {
         type: Number,
-        default: 30
+        default: 100
       },
       height: {
         type: String,
         default: '200px'
+      }
+    },
+    computed: {
+      styles() {
+        return `position: relative;height:${this.height}`
       }
     },
     methods: {
@@ -32,7 +37,7 @@
         clearInterval(time);
         time = setInterval(() => {
           distance -= 1;
-          element.scrollLeft += (distance / 50) * 2.5 * direction;
+          element.scrollLeft += Math.floor((distance / 20) * 2.5 * direction);
           if (distance <= 0 || element.scrollLeft == 0 || element.scrollLeft == element.scrollWidth) {
             clearInterval(time);
           }
@@ -73,19 +78,22 @@
     overflow: hidden;
     height: inherit;
 
+
     .parent {
       position: relative;
-      width: max-content;
       height: inherit;
-      display: flex;
       user-select: none;
+      white-space: nowrap;
 
       div {
         transition: all .2s;
         cursor: pointer;
+        display: inline-block;
+        height: 80%;
+        margin: 20px 10px 10px 10px;
 
         &:hover {
-          transform: scale(1.2);
+          transform: scale(1.1);
         }
       }
     }
