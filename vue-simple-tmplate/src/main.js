@@ -83,6 +83,11 @@ Vue.prototype.$loading = Loading.service
 // 引入接口文档
 import './api'
 
+
+import axios from 'axios'
+import Mock from '@/mock/index'
+
+
 // 引入图标
 import '@/icons' //  全局注册组件
 

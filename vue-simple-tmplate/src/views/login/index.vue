@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import api from '@/axios/api.js'
   import {
     validateUsername,
     validatePass,
@@ -51,7 +52,12 @@
         pwdType: 'password'
       }
     },
-    mounted() {
+    mounted(){
+      api.mockdata('/data/index')
+      .then(res => {
+        console.log(res);
+      })
+
     },
     methods: {
       goto() {
